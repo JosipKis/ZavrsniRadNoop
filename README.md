@@ -4,7 +4,7 @@
 
 # Osnovne smjernice
 ---
-![info](https://img.shields.io/badge/student-info-orange) **Josip Kiš** &rarr;
+![info](https://img.shields.io/badge/student-info-orange) **Vaše ime i prezime: ** Josip Kiš &rarr;
 
 > **Ne zaboravite upisati vaše ime i prezime**, što će biti jedina promjena README.md datoteke koju ćete napraviti &Rarr; commit u `main` granu. 
 
