@@ -31,7 +31,10 @@ public class MainFrame extends JFrame {
             public void buttonPressed(String buttonName) {
                 if (buttonName.equals("customer")){
                     System.out.println("Success");
-                }else {
+                    dispose();
+                    new TicketPurchaseFrame();
+                }else if (buttonName.equals("admin")){
+
                     System.out.println("Fail");
                 }
             }
