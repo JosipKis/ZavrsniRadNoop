@@ -8,8 +8,9 @@ public class MainFrame extends JFrame {
 
     public MainFrame(){
         super("Mr.Kiš Flights");
-        setSize(800, 600);
+        setSize(500, 400);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         setResizable(false);
         initComps();
