@@ -35,8 +35,9 @@ public class MainFrame extends JFrame {
                     dispose();
                     new TicketPurchaseFrame();
                 }else if (buttonName.equals("admin")){
-
-                    System.out.println("Fail");
+                    System.out.println("Admin Login");
+                    dispose();
+                    new AdminLoginFrame();
                 }
             }
         });

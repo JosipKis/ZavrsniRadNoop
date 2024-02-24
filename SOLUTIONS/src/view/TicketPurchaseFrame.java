@@ -1,5 +1,8 @@
 package view;
 
+import model.FlightsINT;
+import model.ObserverINT;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -17,7 +20,7 @@ public class TicketPurchaseFrame extends JFrame {
         setResizable(false);
         initComps();
         layoutComps();
-        activateMainFrame();
+        activateFrame();
     }
 
     private void initComps() {
@@ -34,18 +37,28 @@ public class TicketPurchaseFrame extends JFrame {
 
     }
 
-    private void activateMainFrame() {
+    private void activateFrame() {
         ticketOptionsPanel.setTicketOptionsListener(new TicketOptionsListener() {
             @Override
             public void btnClicked(String btn) {
                 if (btn.equals("calculate")){
                     System.out.println("The price is being calculated...");
+                    ticketOptionsPanel.calculatePrice();
                 } else if (btn.equals("book")) {
                     System.out.println("Thank you for your purchase!");
+                    ticketOptionsPanel.calculatePrice();
+                    dispose();
+                    new PurchaseCompletedFrame();
                 }
             }
         });
+
+        ticketOptionsPanel.setFlightCBListener(new FlightCBListener() {
+            @Override
+            public void checkBoxOptionSelected(FlightsINT selection) {
+                System.out.println("Selection is "+ selection);
+                ticketInfoPanel.update(selection);
+            }
+        });
     }
-
-
 }
