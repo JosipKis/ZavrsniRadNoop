@@ -1,4 +1,4 @@
-package view;
+package view.TicketPurchaseFramePckg;
 
 import model.FlightsINT;
 import model.ObserverINT;

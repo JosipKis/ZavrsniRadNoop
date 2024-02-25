@@ -1,4 +1,4 @@
-package view;
+package view.PurchaseCompletedPckg;
 
 public interface PurchaseCompletedListener {
 

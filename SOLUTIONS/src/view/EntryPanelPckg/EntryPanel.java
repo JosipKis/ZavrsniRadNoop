@@ -1,4 +1,4 @@
-package view;
+package view.EntryPanelPckg;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,6 @@
-package view;
+package view.AdminLoginPckg;
+
+import view.AdministrationFramePckg.AdministrationFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,8 +36,11 @@ public class AdminLoginFrame extends JFrame  {
             public void loginBtnPressed() {
                 if ((adminLoginPanel.getEnteredUserName().equals(adminLoginPanel.getADMINUSERNAME())) && (adminLoginPanel.getEnteredPassword().equals(adminLoginPanel.getADMINPASSWORD()))){
                     System.out.println("Login successful!");
+                    dispose();
+                    new AdministrationFrame();
                 }else {
                     System.out.println("Unsuccessful login!");
+                    JOptionPane.showMessageDialog(null, "Inaccurate password or username!", "Failed Login", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

@@ -1,4 +1,4 @@
-package view;
+package view.AuxClsPckg;
 
 import java.util.ArrayList;
 

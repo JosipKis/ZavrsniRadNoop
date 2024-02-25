@@ -1,7 +1,8 @@
-package view;
+package view.TicketPurchaseFramePckg;
 
 import model.Flights;
 import model.FlightsINT;
+import view.AuxClsPckg.TicketFinalPriceCalculator;
 
 import javax.swing.*;
 import java.awt.*;

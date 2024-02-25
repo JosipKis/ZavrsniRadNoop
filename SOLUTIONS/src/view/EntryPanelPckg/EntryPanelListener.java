@@ -1,4 +1,4 @@
-package view;
+package view.EntryPanelPckg;
 
 public interface EntryPanelListener {
 

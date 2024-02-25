@@ -1,5 +1,10 @@
 package view;
 
+import view.AdminLoginPckg.AdminLoginFrame;
+import view.EntryPanelPckg.EntryPanel;
+import view.EntryPanelPckg.EntryPanelListener;
+import view.TicketPurchaseFramePckg.TicketPurchaseFrame;
+
 import javax.swing.*;
 
 public class MainFrame extends JFrame {

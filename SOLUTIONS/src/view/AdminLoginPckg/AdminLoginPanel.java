@@ -1,4 +1,4 @@
-package view;
+package view.AdminLoginPckg;
 
 import javax.swing.*;
 import java.awt.*;

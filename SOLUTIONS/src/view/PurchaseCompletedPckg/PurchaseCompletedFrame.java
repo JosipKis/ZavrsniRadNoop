@@ -1,4 +1,6 @@
-package view;
+package view.PurchaseCompletedPckg;
+
+import view.TicketPurchaseFramePckg.TicketPurchaseFrame;
 
 import javax.swing.*;
 import java.awt.*;

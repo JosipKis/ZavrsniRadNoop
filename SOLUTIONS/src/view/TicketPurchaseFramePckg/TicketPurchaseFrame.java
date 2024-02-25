@@ -1,6 +1,7 @@
-package view;
+package view.TicketPurchaseFramePckg;
 
 import model.FlightsINT;
+import view.PurchaseCompletedPckg.PurchaseCompletedFrame;
 
 import javax.swing.*;
 import java.awt.*;
