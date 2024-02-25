@@ -39,9 +39,9 @@ public class TicketFinalPriceCalculator {
         flightClassPrice = 0f;
         try {
             switch (flightClass) {
-                case "trdCls" -> flightClassPrice += 150f;
-                case "sndCls" -> flightClassPrice += 600f;
-                case "fstCls" -> flightClassPrice += 3000f;
+                case "Economy" -> flightClassPrice += 150f;
+                case "Business" -> flightClassPrice += 600f;
+                case "First" -> flightClassPrice += 3000f;
             }
         }catch (NullPointerException npe){
 

@@ -1,7 +1,6 @@
 package view;
 
 import model.FlightsINT;
-import model.ObserverINT;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,13 +41,22 @@ public class TicketPurchaseFrame extends JFrame {
             @Override
             public void btnClicked(String btn) {
                 if (btn.equals("calculate")){
-                    System.out.println("The price is being calculated...");
-                    ticketOptionsPanel.calculatePrice();
+                    try {
+                        System.out.println("The price is being calculated...");
+                        ticketOptionsPanel.calculatePrice();
+                    }catch (NullPointerException npe){
+                        JOptionPane.showMessageDialog(null, "Please select a flight you want to book!", "Error", JOptionPane.WARNING_MESSAGE);
+                    }
                 } else if (btn.equals("book")) {
-                    System.out.println("Thank you for your purchase!");
-                    ticketOptionsPanel.calculatePrice();
-                    dispose();
-                    new PurchaseCompletedFrame();
+                    try{
+                        System.out.println("Thank you for your purchase!");
+                        ticketOptionsPanel.calculatePrice();
+                        dispose();
+                        new PurchaseCompletedFrame(ticketOptionsPanel.getDataForTicket());
+                    }catch (NullPointerException npe){
+                        JOptionPane.showMessageDialog(null, "Please select a flight you want to book!", "Error", JOptionPane.WARNING_MESSAGE);
+                    }
+
                 }
             }
         });

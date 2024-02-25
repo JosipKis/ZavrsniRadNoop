@@ -48,11 +48,11 @@ public class TicketOptionsPanel extends JPanel implements ActionListener {
         priceDisplay = new JTextField(10);
         priceDisplay.setEditable(false);
         fstCls =  new JRadioButton("First");
-        fstCls.setActionCommand("fstCls");
+        fstCls.setActionCommand("First");
         sndCls = new JRadioButton("Business");
-        sndCls.setActionCommand("sndCls");
+        sndCls.setActionCommand("Business");
         trdCls = new JRadioButton("Economy");
-        trdCls.setActionCommand("trdCls");
+        trdCls.setActionCommand("Economy");
         flightClasses = new ButtonGroup();
         flightClasses.add(fstCls);
         flightClasses.add(sndCls);
@@ -196,5 +196,15 @@ public class TicketOptionsPanel extends JPanel implements ActionListener {
         System.out.println(flightClasses.getSelection().getActionCommand());
         System.out.println(Arrays.toString(carriedBaggage.toArray()));
         priceDisplay.setText(ticketFinalPriceCalculator.getTotalPrice());
+    }
+
+    public ArrayList<String> getDataForTicket(){
+        ArrayList<String> dataList = new ArrayList<>();
+        dataList.add(ticketFinalPriceCalculator.getTotalPrice());
+        dataList.add(flightClasses.getSelection().getActionCommand());
+        dataList.add(String.valueOf(carriedBaggage));
+        dataList.add(chosenFlight.getID());
+
+        return dataList;
     }
 }

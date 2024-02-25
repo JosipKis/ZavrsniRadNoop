@@ -4,8 +4,11 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-public class PurchaseCompletedPanel extends JPanel {
+public class PurchaseCompletedPanel extends JPanel implements ActionListener {
 
     private JLabel thankYouLabel;
     private JTable ticketInfoTable;
@@ -16,8 +19,11 @@ public class PurchaseCompletedPanel extends JPanel {
     private String[] headerNames;
     private DefaultTableModel tableModel;
     private TableColumnModel tableColumnModel;
+    private ArrayList<String> dataList;
+    private PurchaseCompletedListener purchaseCompletedListener;
 
-    public PurchaseCompletedPanel(){
+    public PurchaseCompletedPanel(ArrayList<String> dataList){
+        this.dataList = dataList;
         initComps();
         layoutComps();
         activateComps();
@@ -27,7 +33,7 @@ public class PurchaseCompletedPanel extends JPanel {
         thankYouLabel = new JLabel("Thank you for you ticket purchase!");
         thankYouLabel.setFont(new Font("Helvetica", Font.BOLD, 20));
 
-        headerNames = new String[]{"Plane", "Destination", "Plane reservation cost", "Flight ID"};
+        headerNames = new String[]{"Total Price", "Flight Class", "Baggage", "Flight ID"};
         tableModel = new DefaultTableModel(headerNames, 0){
 
             @Override
@@ -44,10 +50,12 @@ public class PurchaseCompletedPanel extends JPanel {
         tableColumnModel.getColumn(1).setResizable(false);
         tableColumnModel.getColumn(2).setResizable(false);
         tableColumnModel.getColumn(3).setResizable(false);
-        tableModel.addRow(new Object[]{"hehe", "nibber", "kof", "lolXd"});
+        tableModel.addRow(new Object[]{dataList.get(0), dataList.get(1), dataList.get(2), dataList.get(3)});
 
         print2PDFTicketBtn = new JButton("Save Ticket as PDF");
+        print2PDFTicketBtn.setActionCommand("pdf");
         refundTicketBtn = new JButton("Refund Ticket");
+        refundTicketBtn.setActionCommand("refund");
 
     }
 
@@ -79,6 +87,18 @@ public class PurchaseCompletedPanel extends JPanel {
     }
 
     private void activateComps() {
+        refundTicketBtn.addActionListener(this);
+        print2PDFTicketBtn.addActionListener(this);
+    }
 
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        if (purchaseCompletedListener != null){
+            purchaseCompletedListener.btnPressed(ae.getActionCommand());
+        }
+    }
+
+    public void setPurchaseCompletedListener(PurchaseCompletedListener purchaseCompletedListener) {
+        this.purchaseCompletedListener = purchaseCompletedListener;
     }
 }
