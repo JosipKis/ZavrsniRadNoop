@@ -1,4 +1,4 @@
-package model;
+package view.login;
 
 import javax.swing.*;
 
@@ -29,6 +29,16 @@ public class LoginFrame extends JFrame {
     }
 
     private void activateLoginFrame() {
+        loginPanel.setLoginFrameListener(new LoginFrameListener() {
+            @Override
+            public void loginPerformed(String username, String password) {
+                System.out.println("Username: " + username + "\nPassword: " + password);
+            }
 
+            @Override
+            public void registerPerformed() {
+                System.out.println("Register button clicked");
+            }
+        });
     }
 }

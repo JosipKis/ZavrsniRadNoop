@@ -1,4 +1,4 @@
-import model.LoginFrame;
+import view.login.LoginFrame;
 
 import javax.swing.*;
 

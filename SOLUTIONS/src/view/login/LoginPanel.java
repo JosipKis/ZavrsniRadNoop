@@ -1,14 +1,18 @@
-package model;
+package view.login;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class LoginPanel extends JPanel {
+public class LoginPanel extends JPanel implements ActionListener {
 
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton loginButton;
     private JButton registerButton;
+
+    private LoginFrameListener loginFrameListener;
 
     public LoginPanel(){
         initComps();
@@ -21,7 +25,10 @@ public class LoginPanel extends JPanel {
         passwordField = new JPasswordField(15);
 
         loginButton = new JButton("Login");
+        loginButton.setActionCommand("login");
+
         registerButton = new JButton("Registracija");
+        registerButton.setActionCommand("register");
     }
 
     private void layoutComps() {
@@ -59,6 +66,22 @@ public class LoginPanel extends JPanel {
     }
 
     private void activateLoginPanel() {
+        loginButton.addActionListener(this);
+        registerButton.addActionListener(this);
+    }
 
+    public void setLoginFrameListener(LoginFrameListener loginFrameListener) {
+        this.loginFrameListener = loginFrameListener;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (loginFrameListener != null){
+            if (e.getActionCommand().equals("login")){
+                loginFrameListener.loginPerformed(usernameField.getText(), new String(passwordField.getPassword()));
+            } else if (e.getActionCommand().equals("register")){
+                loginFrameListener.registerPerformed();
+            }
+        }
     }
 }
