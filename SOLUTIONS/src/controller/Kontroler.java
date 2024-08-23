@@ -35,6 +35,14 @@ public class Kontroler {
         }
     }
 
+    public void dissconnect(){
+        try {
+            con.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public boolean autehnticateLogin(String username, String password) throws SQLException {
         String SELECT_USER_QUERY = "SELECT * FROM User WHERE username = ? AND password = ?";
 
@@ -62,6 +70,19 @@ public class Kontroler {
             return false;
         }
 
+    }
+
+    public void registerNewUser(String username, String password, int age) throws SQLException {
+        int id = 3;
+        String INSERT_USER_QUERY = "INSERT INTO User (id, username, password, age,  role) VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement preparedStatement = con.prepareStatement(INSERT_USER_QUERY);
+        preparedStatement.setInt(1, id);
+        preparedStatement.setString(2, username);
+        preparedStatement.setString(3, password);
+        preparedStatement.setInt(4, age);
+        preparedStatement.setString(5, "user");
+
+        preparedStatement.executeUpdate();
     }
 
     public String getUserRole(){

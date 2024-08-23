@@ -71,7 +71,10 @@ public class LoginFrame extends JFrame {
 
             @Override
             public void registerPerformed() {
-                System.out.println("Register button clicked");
+                kontroler.dissconnect();
+                setVisible(false);
+                dispose();
+                new RegisterFrame();
             }
         });
     }
