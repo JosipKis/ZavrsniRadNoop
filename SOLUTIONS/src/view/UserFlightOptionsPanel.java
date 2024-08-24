@@ -12,6 +12,7 @@ public class UserFlightOptionsPanel extends JPanel {
     private JRadioButton firstClass;
     private JRadioButton businessClass;
     private JRadioButton economyClass;
+    private ButtonGroup buttonGroup;
 
     public UserFlightOptionsPanel(){
         super();
@@ -31,6 +32,11 @@ public class UserFlightOptionsPanel extends JPanel {
         firstClass.setSelected(true);
         businessClass = new JRadioButton("Business Class");
         economyClass = new JRadioButton("Economy Class");
+
+        buttonGroup = new ButtonGroup();
+        buttonGroup.add(firstClass);
+        buttonGroup.add(businessClass);
+        buttonGroup.add(economyClass);
     }
 
     private void layoutComps() {
@@ -38,26 +44,28 @@ public class UserFlightOptionsPanel extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridy = 0;
         gbc.gridx = 0;
+        gbc.insets = new Insets(0, 0, 0, 10);
 
         add(flightsComboBox, gbc);
         gbc.gridx++;
-        gbc.insets = new Insets(0, 15, 0, 0);
+        gbc.insets = new Insets(0, 0, 0, 15);
 
         add(handLuggage, gbc);
         gbc.gridy++;
-        gbc.insets = new Insets(0, 35, 0, 0);
+        gbc.insets = new Insets(0, 2, 0, 0);
 
         add(checkedLuggage, gbc);
         gbc.gridy = 0;
         gbc.gridx++;
-        gbc.insets = new Insets(0, 20, 0, 0);
+        gbc.insets = new Insets(0, 0, 0, 0);
 
         add(firstClass, gbc);
         gbc.gridy++;
-        gbc.insets = new Insets(0, 48, 0, 0);
+        gbc.insets = new Insets(0, 23, 5, 0);
 
         add(businessClass, gbc);
         gbc.gridy++;
+        gbc.insets = new Insets(0, 27, 0, 0);
 
         add(economyClass, gbc);
     }
