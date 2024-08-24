@@ -1,10 +1,12 @@
 package view;
 
+import model.DocFilterAge;
+
 import javax.swing.*;
+import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
 public class RegisterPanel extends JPanel implements ActionListener {
 
@@ -13,6 +15,8 @@ public class RegisterPanel extends JPanel implements ActionListener {
     private JTextField age;
 
     private JButton registerButton;
+
+    private PlainDocument plainDocument;
 
     private RegisterFrameListener registerFrameListener;
 
@@ -26,12 +30,19 @@ public class RegisterPanel extends JPanel implements ActionListener {
     private void initComps() {
         username = new JTextField();
         username.setPreferredSize(new Dimension(200, 30));
+        username.setToolTipText("Unesite korinsičko ime");
 
         password = new JPasswordField();
         password.setPreferredSize(new Dimension(200, 30));
+        password.setToolTipText("Zbog sigurnosti, ne dijelite lozinku");
 
         age = new JTextField();
-        age.setPreferredSize(new Dimension(30, 30));
+        age.setPreferredSize(new Dimension(35, 30));
+        age.setToolTipText("Dob mora biti broj veci od 18, manji od 100");
+        age.setHorizontalAlignment(JTextField.CENTER);
+
+        plainDocument = (PlainDocument) age.getDocument();
+        plainDocument.setDocumentFilter(new DocFilterAge());
 
         registerButton = new JButton("Register");
         registerButton.setActionCommand("register");
