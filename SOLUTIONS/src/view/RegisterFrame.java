@@ -3,7 +3,6 @@ package view;
 import controller.Kontroler;
 
 import javax.swing.*;
-import java.sql.SQLException;
 
 public class RegisterFrame extends JFrame {
 
@@ -42,12 +41,15 @@ public class RegisterFrame extends JFrame {
     private void activateFrame() {
         registerPanel.setRegisterFrameListener(new RegisterFrameListener() {
             @Override
-            public void loginPanelEventOccurred(String btnClicked) {
-                try{
+            public void registerButtonClicked(String btnClicked) {
+                if (registerPanel.getAge() > 17){
                     kontroler.registerNewUser(registerPanel.getUsername(), registerPanel.getPassword(), registerPanel.getAge());
-                    System.out.println("USer added successfully :D");
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    System.out.println("User added successfully :D");
+                    setVisible(false);
+                    dispose();
+                    new LoginFrame();
+                }else {
+                    JOptionPane.showMessageDialog(null, "Korisnik mora imati 18+ godina!", "Dobna granica", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });

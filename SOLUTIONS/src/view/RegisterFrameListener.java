@@ -4,5 +4,5 @@ import java.util.EventListener;
 
 public interface RegisterFrameListener extends EventListener {
 
-    void loginPanelEventOccurred(String btnClicked);
+    void registerButtonClicked(String btnClicked);
 }

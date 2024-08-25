@@ -91,7 +91,7 @@ public class RegisterPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (registerFrameListener != null) {
-            registerFrameListener.loginPanelEventOccurred(e.getActionCommand());
+            registerFrameListener.registerButtonClicked(e.getActionCommand());
         }
     }
 
