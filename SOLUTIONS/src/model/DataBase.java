@@ -3,6 +3,7 @@ package model;
 public class DataBase {
 
     private User currentUser;
+    private Flight flight;
 
     public DataBase() {
     }
@@ -15,4 +16,11 @@ public class DataBase {
         return currentUser;
     }
 
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
 }
