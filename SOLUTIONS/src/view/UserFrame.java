@@ -28,7 +28,7 @@ public class UserFrame extends JFrame {
         flightListPanel = new FlightListPanel();
         flightListPanel.setPreferredSize(new Dimension(300, 250));
 
-        userPanel.setText(flightListPanel.getSelectedFlight());
+        flightListPanel.activateTable(flightListPanel.getDaTable(), userPanel);
     }
 
     private void layoutComps() {

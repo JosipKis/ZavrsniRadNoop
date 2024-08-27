@@ -22,8 +22,6 @@ public class FlightListPanel extends JPanel {
 
     private List<Flight> flights;
 
-    private String flightSelection;
-
     public FlightListPanel(){
         super();
         initComps();
@@ -33,8 +31,6 @@ public class FlightListPanel extends JPanel {
     private void initComps() {
         kontroler = new Kontroler();
         dataBase = new DataBase();
-
-        flightSelection = "";
 
         try {
             kontroler.connectToDatabase();
@@ -50,7 +46,6 @@ public class FlightListPanel extends JPanel {
         table.setModel(abstractTableModel);
         table.getTableHeader().setReorderingAllowed(false);
         scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        activateTable(table);
     }
 
     private void layoutComps() {
@@ -97,25 +92,29 @@ public class FlightListPanel extends JPanel {
         return tableModel;
     }
 
-    private void activateTable(JTable someTable) {
+    public void activateTable(JTable someTable, UserPanel userPanel) {
         someTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 1) {
                     JTable target = (JTable)e.getSource();
                     int row = target.getSelectedRow();
+                    StringBuilder flightSelection = new StringBuilder();
 
                     for (int column = 0; column < target.getColumnCount(); column++) {
                         Object value = target.getValueAt(row, column);
-                        flightSelection += value + ", ";
+                        flightSelection.append(value).append(", ");
                     }
-                    System.out.println(flightSelection);
+
+                    if (userPanel != null) {
+                        userPanel.setText(flightSelection.toString());
+                    }
                 }
             }
         });
     }
 
-    public String getSelectedFlight(){
-        return flightSelection;
+    public JTable getDaTable(){
+        return table;
     }
 }
