@@ -1,9 +1,11 @@
 package controller;
 
 import model.DataBase;
+import model.Flight;
 import model.User;
 
 import java.sql.*;
+import java.util.List;
 
 public class Kontroler {
 
@@ -85,6 +87,35 @@ public class Kontroler {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<Flight> getAllFlights(){
+        if (con != null){
+            String dbQuery = "SELECT * FROM Flights";
+            try (PreparedStatement selectStm = con.prepareStatement(dbQuery)) {
+                try (ResultSet resultSet = selectStm.executeQuery()) {
+                    while (resultSet.next()) {
+                        int flightID = resultSet.getInt("id");
+                        int flightPlane = resultSet.getInt("plane");
+                        String departure = resultSet.getString("departure");
+                        String destination = resultSet.getString("destination");
+                        Date date = resultSet.getDate("departure_time");
+
+                        Flight flight = new Flight();
+                        flight.setFlightNumber(flightID);
+                        flight.setPlane(flightPlane);
+                        flight.setDeparture(departure);
+                        flight.setDestination(destination);
+                        flight.setDepartureTime(String.valueOf(date));
+
+                        dataBase.getFlightsFromDB(flight);
+                    }
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return dataBase.getFlights();
     }
 
     public String getUserRole(){

@@ -2,14 +2,14 @@ package model;
 
 public class Flight {
 
-    private String flightNumber;
+    private int flightNumber;
     private String departure;
     private String destination;
     private String departureTime;
-    private String plane;
+    private int planeID;
     private String price;
 
-    public String getFlightNumber() { return flightNumber; }
+    public int getFlightNumber() { return flightNumber; }
 
     public String getDeparture() { return departure; }
 
@@ -17,11 +17,11 @@ public class Flight {
 
     public String getDepartureTime() { return departureTime; }
 
-    public String getPlane() { return plane; }
+    public int getPlane() { return planeID; }
 
     public String getPrice() { return price; }
 
-    public void setFlightNumber(String flightNumber) { this.flightNumber = flightNumber; }
+    public void setFlightNumber(int flightNumber) { this.flightNumber = flightNumber; }
 
     public void setDeparture(String departure) { this.departure = departure; }
 
@@ -29,7 +29,19 @@ public class Flight {
 
     public void setDepartureTime(String departureTime) { this.departureTime = departureTime; }
 
-    public void setPlane(String plane) { this.plane = plane; }
+    public void setPlane(int planeID) { this.planeID = planeID; }
 
     public void setPrice(String price) { this.price = price; }
+
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "flightNumber=" + flightNumber +
+                ", departure='" + departure + '\'' +
+                ", destination='" + destination + '\'' +
+                ", departureTime='" + departureTime + '\'' +
+                ", planeID=" + planeID +
+                ", price='" + price + '\'' +
+                '}';
+    }
 }
