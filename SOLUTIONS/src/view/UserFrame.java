@@ -26,7 +26,9 @@ public class UserFrame extends JFrame {
         userPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         flightListPanel = new FlightListPanel();
-        flightListPanel.setPreferredSize(new Dimension(700, 280));
+        flightListPanel.setPreferredSize(new Dimension(300, 250));
+
+        userPanel.setText(flightListPanel.getSelectedFlight());
     }
 
     private void layoutComps() {
@@ -34,7 +36,7 @@ public class UserFrame extends JFrame {
 
         add(userPanel, BorderLayout.SOUTH);
 
-        add(flightListPanel, BorderLayout.CENTER);
+        add(flightListPanel, BorderLayout.NORTH);
     }
 
     private void activateFrame() {

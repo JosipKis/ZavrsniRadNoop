@@ -32,4 +32,8 @@ public class UserPanel extends JPanel {
     private void activatePanel() {
 
     }
+
+    public void setText(String text){
+        userFlightFinalizationPanel.setText(text);
+    }
 }

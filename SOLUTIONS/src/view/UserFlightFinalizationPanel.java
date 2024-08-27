@@ -41,4 +41,8 @@ public class UserFlightFinalizationPanel extends JPanel {
     private void activatePanel() {
 
     }
+
+    public void setText(String text){
+        flightDetails.setText(text);
+    }
 }
