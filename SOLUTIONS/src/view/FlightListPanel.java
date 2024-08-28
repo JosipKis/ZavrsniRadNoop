@@ -6,6 +6,7 @@ import model.Flight;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -45,6 +46,11 @@ public class FlightListPanel extends JPanel {
         this.abstractTableModel = initTable();
         table.setModel(abstractTableModel);
         table.getTableHeader().setReorderingAllowed(false);
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( SwingConstants.CENTER );
+        table.setDefaultRenderer(Object.class, centerRenderer);
+
         scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     }
 
@@ -69,7 +75,7 @@ public class FlightListPanel extends JPanel {
                 Flight flight = flights.get(rowIndex);
                 switch(columnIndex){
                     case 0:
-                        return flight.getFlightNumber();
+                        return kontroler.getPlaneByID(flight.getFlightNumber());
                     case 1:
                         return flight.getDeparture();
                     case 2:
@@ -96,7 +102,7 @@ public class FlightListPanel extends JPanel {
         someTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 1) {
+                if (e.getClickCount() == 2) {
                     JTable target = (JTable)e.getSource();
                     int row = target.getSelectedRow();
                     StringBuilder flightSelection = new StringBuilder();

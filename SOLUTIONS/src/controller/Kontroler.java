@@ -118,7 +118,28 @@ public class Kontroler {
         return dataBase.getFlights();
     }
 
-    public String getUserRole(){
+    public String getPlaneByID(int id) {
+        if (con != null) {
+            String query = "SELECT Plane.name FROM Plane WHERE id = ?;";
+            try (PreparedStatement selectStm = con.prepareStatement(query)) {
+                selectStm.setInt(1, id);
+                try (ResultSet resultSet = selectStm.executeQuery()) {
+                    while (resultSet.next()){
+                        String name = resultSet.getString("name");
+
+                        dataBase.setPlaneName(name);
+                    }
+                }
+
+            }catch (SQLException e){
+                throw new RuntimeException(e);
+            }
+        }
+        return dataBase.returnPlaneName();
+    }
+
+
+            public String getUserRole(){
         return currentUserRole;
     }
 }

@@ -7,9 +7,11 @@ public class DataBase {
 
     private User currentUser;
     private List<Flight> flights;
+    private String planeName;
 
     public DataBase() {
         flights = new ArrayList<>();
+        planeName = "";
     }
 
     public void setCurrentUser(User currentUser) {
@@ -35,5 +37,13 @@ public class DataBase {
         }else {
             System.out.println("Greška pri učitavanju  -  let je već unesen ili je null");
         }
+    }
+
+    public void setPlaneName(String planeName){
+        this.planeName = planeName;
+    }
+
+    public String returnPlaneName(){
+        return planeName;
     }
 }
