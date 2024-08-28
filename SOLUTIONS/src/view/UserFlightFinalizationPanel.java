@@ -2,12 +2,16 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class UserFlightFinalizationPanel extends JPanel {
+public class UserFlightFinalizationPanel extends JPanel implements ActionListener {
 
     private JTextArea flightDetails;
 
     private JButton bookButton;
+
+    private BookingListener boogkingListener;
 
     public UserFlightFinalizationPanel(){
         super();
@@ -23,6 +27,7 @@ public class UserFlightFinalizationPanel extends JPanel {
         flightDetails.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         bookButton = new JButton("Book");
+        bookButton.setActionCommand("book");
     }
 
     private void layoutComps() {
@@ -39,10 +44,25 @@ public class UserFlightFinalizationPanel extends JPanel {
     }
 
     private void activatePanel() {
+        bookButton.addActionListener(this);
+    }
 
+    public void setBookingListener(BookingListener boogkingListener){
+        this.boogkingListener = boogkingListener;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        if (boogkingListener != null){
+            boogkingListener.bookButtonClicked(ae.getActionCommand());
+        }
     }
 
     public void setText(String text){
         flightDetails.setText(text);
+    }
+
+    public String getText(){
+        return flightDetails.getText();
     }
 }

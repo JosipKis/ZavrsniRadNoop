@@ -9,6 +9,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FlightListPanel extends JPanel {
@@ -22,6 +23,8 @@ public class FlightListPanel extends JPanel {
     private DataBase dataBase;
 
     private List<Flight> flights;
+    private StringBuilder flightSelection;
+    private List<String> flightDetails;
 
     public FlightListPanel(){
         super();
@@ -105,11 +108,13 @@ public class FlightListPanel extends JPanel {
                 if (e.getClickCount() == 2) {
                     JTable target = (JTable)e.getSource();
                     int row = target.getSelectedRow();
-                    StringBuilder flightSelection = new StringBuilder();
+                    flightSelection = new StringBuilder();
+                    flightDetails = new ArrayList<>();
 
                     for (int column = 0; column < target.getColumnCount(); column++) {
                         Object value = target.getValueAt(row, column);
-                        flightSelection.append(value).append(", ");
+                        flightSelection.append(value).append("\n");
+                        flightDetails.add(value.toString());
                     }
 
                     if (userPanel != null) {
@@ -120,7 +125,15 @@ public class FlightListPanel extends JPanel {
         });
     }
 
+    public StringBuilder getFlightSelection(){
+        return flightSelection;
+    }
+
     public JTable getDaTable(){
         return table;
+    }
+
+    public List<String> getDetailsOfFlight(){
+        return flightDetails;
     }
 }

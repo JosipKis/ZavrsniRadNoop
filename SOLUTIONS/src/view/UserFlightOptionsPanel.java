@@ -26,12 +26,19 @@ public class UserFlightOptionsPanel extends JPanel {
         flightsComboBox.setPreferredSize(new Dimension(100, 30));
 
         handLuggage = new JCheckBox("Hand Luggage");
+        handLuggage.setEnabled(false);
         checkedLuggage = new JCheckBox("Checked Luggage");
+        checkedLuggage.setEnabled(false);
 
         firstClass = new JRadioButton("First Class");
-        firstClass.setSelected(true);
+        firstClass.setActionCommand("first");
+        firstClass.setEnabled(false);
         businessClass = new JRadioButton("Business Class");
+        businessClass.setActionCommand("bussy");
+        businessClass.setEnabled(false);
         economyClass = new JRadioButton("Economy Class");
+        economyClass.setActionCommand("eco");
+        economyClass.setEnabled(false);
 
         buttonGroup = new ButtonGroup();
         buttonGroup.add(firstClass);
@@ -72,5 +79,9 @@ public class UserFlightOptionsPanel extends JPanel {
 
     private void activatePanel() {
 
+    }
+
+    public String getSelectedFlightClass(){
+        return buttonGroup.getSelection().getActionCommand();
     }
 }

@@ -12,7 +12,6 @@ public class UserPanel extends JPanel {
         super();
         initComps();
         layoutComps();
-        activatePanel();
     }
 
     private void initComps() {
@@ -29,11 +28,19 @@ public class UserPanel extends JPanel {
         add(userFlightFinalizationPanel);
     }
 
-    private void activatePanel() {
-
+    public void setBookingListener(BookingListener bookingListener){
+        userFlightFinalizationPanel.setBookingListener(bookingListener);
     }
 
     public void setText(String text){
         userFlightFinalizationPanel.setText(text);
+    }
+
+    public String getText(){
+        return userFlightFinalizationPanel.getText();
+    }
+
+    public String getSelectedPlaneClass(){
+        return userFlightOptionsPanel.getSelectedFlightClass();
     }
 }

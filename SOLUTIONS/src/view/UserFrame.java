@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class UserFrame extends JFrame {
 
@@ -9,7 +10,7 @@ public class UserFrame extends JFrame {
     private FlightListPanel flightListPanel;
 
     public UserFrame() {
-        super("User Frame");
+        super("Mr. KIŠ FLIGHTS");
         setSize(700, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -17,7 +18,7 @@ public class UserFrame extends JFrame {
         setResizable(false);
         initComps();
         layoutComps();
-        activateFrame();
+        activateUserFrame();
     }
 
     private void initComps() {
@@ -39,7 +40,16 @@ public class UserFrame extends JFrame {
         add(flightListPanel, BorderLayout.NORTH);
     }
 
-    private void activateFrame() {
-
+    private void activateUserFrame() {
+        userPanel.setBookingListener(new BookingListener() {
+            @Override
+            public void bookButtonClicked(String button) {
+                List<String> lista = flightListPanel.getDetailsOfFlight();
+                for (String detail: lista){
+                    System.out.println(detail + "\n");
+                }
+                System.out.println(userPanel.getSelectedPlaneClass());
+            }
+        });
     }
 }
