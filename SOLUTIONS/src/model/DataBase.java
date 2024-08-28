@@ -8,9 +8,11 @@ public class DataBase {
     private User currentUser;
     private List<Flight> flights;
     private String planeName;
+    private List<Integer> chosenPlaneClasses;
 
     public DataBase() {
         flights = new ArrayList<>();
+        chosenPlaneClasses = new ArrayList<>();
         planeName = "";
     }
 
@@ -45,5 +47,17 @@ public class DataBase {
 
     public String returnPlaneName(){
         return planeName;
+    }
+
+    public void addPlaneClasses(int cls){
+        chosenPlaneClasses.add(cls);
+    }
+
+    public void resetPlaneClasses(){
+        chosenPlaneClasses.clear();
+    }
+
+    public List<Integer> getChosenPlaneClasses(){
+        return chosenPlaneClasses;
     }
 }

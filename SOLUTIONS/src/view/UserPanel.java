@@ -40,7 +40,11 @@ public class UserPanel extends JPanel {
         return userFlightFinalizationPanel.getText();
     }
 
-    public String getSelectedPlaneClass(){
-        return userFlightOptionsPanel.getSelectedFlightClass();
+    public void enableSelection(int first, int second, int third){
+        userFlightOptionsPanel.setEnableOptions(first, second, third);
+    }
+
+    public void disableOptions(){
+        userFlightOptionsPanel.disableOptions();
     }
 }

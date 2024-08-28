@@ -22,6 +22,8 @@ public class FlightListPanel extends JPanel {
     private Kontroler kontroler;
     private DataBase dataBase;
 
+    private String planeID;
+    private List<Integer> planeClasses;
     private List<Flight> flights;
     private StringBuilder flightSelection;
     private List<String> flightDetails;
@@ -62,6 +64,7 @@ public class FlightListPanel extends JPanel {
     }
 
     private AbstractTableModel initTable() {
+
         AbstractTableModel tableModel = new AbstractTableModel() {
             @Override
             public int getRowCount() {
@@ -78,7 +81,8 @@ public class FlightListPanel extends JPanel {
                 Flight flight = flights.get(rowIndex);
                 switch(columnIndex){
                     case 0:
-                        return kontroler.getPlaneByID(flight.getFlightNumber());
+                        planeID = kontroler.getPlaneNameByID(flight.getFlightNumber());
+                        return kontroler.getPlaneNameByID(flight.getFlightNumber());
                     case 1:
                         return flight.getDeparture();
                     case 2:
@@ -110,6 +114,7 @@ public class FlightListPanel extends JPanel {
                     int row = target.getSelectedRow();
                     flightSelection = new StringBuilder();
                     flightDetails = new ArrayList<>();
+                    planeClasses = new ArrayList<>();
 
                     for (int column = 0; column < target.getColumnCount(); column++) {
                         Object value = target.getValueAt(row, column);
@@ -119,6 +124,10 @@ public class FlightListPanel extends JPanel {
 
                     if (userPanel != null) {
                         userPanel.setText(flightSelection.toString());
+                        planeClasses = kontroler.getPlaneClasses(target.getValueAt(row, 0).toString());
+                        System.out.println(target.getValueAt(row, 0));
+                        userPanel.disableOptions();
+                        userPanel.enableSelection(planeClasses.get(0), planeClasses.get(1), planeClasses.get(2));
                     }
                 }
             }
@@ -135,5 +144,9 @@ public class FlightListPanel extends JPanel {
 
     public List<String> getDetailsOfFlight(){
         return flightDetails;
+    }
+
+    public List<Integer> getPlaneClasses(){
+        return planeClasses;
     }
 }

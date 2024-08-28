@@ -84,4 +84,31 @@ public class UserFlightOptionsPanel extends JPanel {
     public String getSelectedFlightClass(){
         return buttonGroup.getSelection().getActionCommand();
     }
+
+    public void setEnableOptions(int first, int second, int third){
+        handLuggage.setEnabled(true);
+        checkedLuggage.setEnabled(true);
+
+        if (first != 0){
+            firstClass.setEnabled(true);
+        }
+
+        if (second != 0){
+            businessClass.setEnabled(true);
+        }
+
+        if (third != 0){
+            economyClass.setEnabled(true);
+        }
+        System.out.println("First: " + first + ", Second: " + second + ", Third: " + third);
+
+    }
+
+    public void disableOptions(){
+        handLuggage.setEnabled(false);
+        checkedLuggage.setEnabled(false);
+        firstClass.setEnabled(false);
+        businessClass.setEnabled(false);
+        economyClass.setEnabled(false);
+    }
 }

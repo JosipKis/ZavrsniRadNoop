@@ -118,7 +118,7 @@ public class Kontroler {
         return dataBase.getFlights();
     }
 
-    public String getPlaneByID(int id) {
+    public String getPlaneNameByID(int id) {
         if (con != null) {
             String query = "SELECT Plane.name FROM Plane WHERE id = ?;";
             try (PreparedStatement selectStm = con.prepareStatement(query)) {
@@ -138,8 +138,37 @@ public class Kontroler {
         return dataBase.returnPlaneName();
     }
 
+    public List<Integer> getPlaneClasses(String name){
+        if (con != null) {
+            System.out.println(name);
+            String query = "SELECT * FROM Plane WHERE name = ?;";
+            System.out.println("query passes");
+            try (PreparedStatement selectStm = con.prepareStatement(query)) {
+                System.out.println("1st");
+                selectStm.setString(1, name);
+                try (ResultSet resultSet = selectStm.executeQuery()) {
+                    System.out.println("2nd");
+                    while (resultSet.next()){
+                        dataBase.resetPlaneClasses();
 
-            public String getUserRole(){
+                        int isFirstClass = resultSet.getInt("firstClass");
+                        int isBusinessClass = resultSet.getInt("businessClass");
+                        int isEconomy = resultSet.getInt("economyClass");
+
+                        dataBase.addPlaneClasses(isFirstClass);
+                        dataBase.addPlaneClasses(isBusinessClass);
+                        dataBase.addPlaneClasses(isEconomy);
+                    }
+                }
+
+            }catch (SQLException e){
+                throw new RuntimeException(e);
+            }
+        }
+        return dataBase.getChosenPlaneClasses();
+    }
+
+    public String getUserRole(){
         return currentUserRole;
     }
 }

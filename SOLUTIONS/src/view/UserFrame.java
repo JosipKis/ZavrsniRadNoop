@@ -48,7 +48,6 @@ public class UserFrame extends JFrame {
                 for (String detail: lista){
                     System.out.println(detail + "\n");
                 }
-                System.out.println(userPanel.getSelectedPlaneClass());
             }
         });
     }
