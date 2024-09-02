@@ -15,7 +15,7 @@ public class Kontroler {
     private static final String DB_USER = "jkis";
     private static final String DB_PASSWORD = "noop,LOZINKA101a";
 
-    private User currentUser;
+    private static User currentUser;
     private String currentUserRole;
     private DataBase dataBase;
 
@@ -166,6 +166,10 @@ public class Kontroler {
             }
         }
         return dataBase.getChosenPlaneClasses();
+    }
+
+    public static String getCurrentUser() {
+        return currentUser.getUsername();
     }
 
     public String getUserRole(){

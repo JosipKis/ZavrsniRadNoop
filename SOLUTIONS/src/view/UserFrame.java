@@ -45,8 +45,11 @@ public class UserFrame extends JFrame {
             @Override
             public void bookButtonClicked(String button) {
                 List<String> lista = flightListPanel.getDetailsOfFlight();
-                for (String detail: lista){
-                    System.out.println(detail + "\n");
+                if (lista != null){
+                    dispose();
+                    new Receipt4FlightFrame(lista);
+                }else {
+                    JOptionPane.showMessageDialog(null, "Molimo odaberite let prije rezervacije karte!", "Greška: let nije odabran!", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
