@@ -12,9 +12,7 @@ public class ReceiptPanel extends JPanel {
     private JTextField plane;
     private JTextField takeOffCity;
     private JTextField destinationCity;
-    private String takeOffDate;
-    private JButton printToPDF;
-    private JButton confirmBtn;
+    private JTextField takeOffDate;
 
     private List<String> flightDetails;
 
@@ -24,7 +22,6 @@ public class ReceiptPanel extends JPanel {
         this.flightDetails = flightDetails;
         initComps();
         layoutComps();
-        activateComps();
     }
 
     private void initComps() {
@@ -33,12 +30,8 @@ public class ReceiptPanel extends JPanel {
         plane = new JTextField(flightDetails.get(0));
         takeOffCity = new JTextField(flightDetails.get(1));
         destinationCity = new JTextField(flightDetails.get(2));
-        takeOffDate = flightDetails.get(3);
+        takeOffDate = new JTextField(flightDetails.get(3));
 
-        printToPDF = new JButton("PDF karta");
-
-        confirmBtn = new JButton("Potvrdi");
-        confirmBtn.setPreferredSize(printToPDF.getPreferredSize());
     }
 
     private void layoutComps() {
@@ -47,10 +40,38 @@ public class ReceiptPanel extends JPanel {
         gbc.gridy = 0;
         gbc.gridx = 0;
 
-        add(new JLabel("Hvala vam na kupovini karte " + Kontroler.getCurrentUser() + "!"), gbc);
-    }
+        gbc.gridy++;
+        gbc.insets = new Insets(0, 0, 0, 0);
 
-    private void activateComps() {
+        add(new JLabel("Podaci o letu:"), gbc);
+        gbc.gridy++;
 
+        add(new JLabel("Avion: "), gbc);
+        gbc.gridx++;
+
+        add(plane, gbc);
+        gbc.gridx--;
+        gbc.gridy++;
+
+        add(new JLabel("Polazni grad: "), gbc);
+        gbc.gridx++;
+
+        add(takeOffCity, gbc);
+        gbc.gridx--;
+        gbc.gridy++;
+
+        add(new JLabel("Odredišni grad: "), gbc);
+        gbc.gridx++;
+
+        add(destinationCity, gbc);
+        gbc.gridx--;
+        gbc.gridy++;
+
+        add(new JLabel("Datum polaska: "), gbc);
+        gbc.gridx++;
+
+        add(takeOffDate, gbc);
+        gbc.gridx--;
+        gbc.gridy++;
     }
 }
