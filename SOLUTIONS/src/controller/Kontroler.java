@@ -169,6 +169,7 @@ public class Kontroler {
     }
 
     public static String getCurrentUser() {
+
         return currentUser.getUsername();
     }
 
