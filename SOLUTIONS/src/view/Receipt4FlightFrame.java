@@ -40,6 +40,9 @@ public class Receipt4FlightFrame extends JFrame {
         add(new JLabel("Hvala vam na kupovini karte " + Kontroler.getCurrentUser() + "!"), gbc);
         gbc.gridy++;
 
+        add(new JLabel("Podaci o letu:"), gbc);
+        gbc.gridy++;
+
         add(receiptPanel, gbc);
         gbc.gridy++;
 

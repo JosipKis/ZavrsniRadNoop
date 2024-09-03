@@ -13,6 +13,7 @@ public class ReceiptPanel extends JPanel {
     private JTextField takeOffCity;
     private JTextField destinationCity;
     private JTextField takeOffDate;
+    private JTextField takeOffTime;
 
     private List<String> flightDetails;
 
@@ -31,7 +32,7 @@ public class ReceiptPanel extends JPanel {
         takeOffCity = new JTextField(flightDetails.get(1));
         destinationCity = new JTextField(flightDetails.get(2));
         takeOffDate = new JTextField(flightDetails.get(3));
-
+        takeOffTime = new JTextField(flightDetails.get(4));
     }
 
     private void layoutComps() {
@@ -39,12 +40,6 @@ public class ReceiptPanel extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridy = 0;
         gbc.gridx = 0;
-
-        gbc.gridy++;
-        gbc.insets = new Insets(0, 0, 0, 0);
-
-        add(new JLabel("Podaci o letu:"), gbc);
-        gbc.gridy++;
 
         add(new JLabel("Avion: "), gbc);
         gbc.gridx++;
@@ -73,5 +68,10 @@ public class ReceiptPanel extends JPanel {
         add(takeOffDate, gbc);
         gbc.gridx--;
         gbc.gridy++;
+
+        add(new JLabel("Vrijeme polaska: "), gbc);
+        gbc.gridx++;
+
+        add(takeOffTime, gbc);
     }
 }

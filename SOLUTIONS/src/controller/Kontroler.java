@@ -100,13 +100,15 @@ public class Kontroler {
                         String departure = resultSet.getString("departure");
                         String destination = resultSet.getString("destination");
                         Date date = resultSet.getDate("departure_time");
+                        Time time = resultSet.getTime("departure_time");
 
                         Flight flight = new Flight();
                         flight.setFlightNumber(flightID);
                         flight.setPlane(flightPlane);
                         flight.setDeparture(departure);
                         flight.setDestination(destination);
-                        flight.setDepartureTime(String.valueOf(date));
+                        flight.setDepartureDate(String.valueOf(date));
+                        flight.setDepartureTime(String.valueOf(time));
 
                         dataBase.getFlightsFromDB(flight);
                     }

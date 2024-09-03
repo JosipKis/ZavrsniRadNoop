@@ -5,9 +5,9 @@ public class Flight {
     private int flightNumber;
     private String departure;
     private String destination;
-    private String departureTime;
+    private String departureDate;
     private int planeID;
-    private String price;
+    private String departureTime;
 
     public int getFlightNumber() { return flightNumber; }
 
@@ -15,11 +15,11 @@ public class Flight {
 
     public String getDestination() { return destination; }
 
-    public String getDepartureTime() { return departureTime; }
+    public String getDepartureDate() { return departureDate; }
 
     public int getPlane() { return planeID; }
 
-    public String getPrice() { return price; }
+    public String getDepartureTime() { return departureTime; }
 
     public void setFlightNumber(int flightNumber) { this.flightNumber = flightNumber; }
 
@@ -27,11 +27,11 @@ public class Flight {
 
     public void setDestination(String destination) { this.destination = destination; }
 
-    public void setDepartureTime(String departureTime) { this.departureTime = departureTime; }
+    public void setDepartureDate(String departureDate) { this.departureDate = departureDate; }
 
     public void setPlane(int planeID) { this.planeID = planeID; }
 
-    public void setPrice(String price) { this.price = price; }
+    public void setDepartureTime(String departureTime) { this.departureTime = departureTime; }
 
     @Override
     public String toString() {
@@ -39,9 +39,9 @@ public class Flight {
                 "flightNumber=" + flightNumber +
                 ", departure='" + departure + '\'' +
                 ", destination='" + destination + '\'' +
-                ", departureTime='" + departureTime + '\'' +
+                ", departureTime='" + departureDate + '\'' +
                 ", planeID=" + planeID +
-                ", price='" + price + '\'' +
+                ", price='" + departureTime + '\'' +
                 '}';
     }
 }
