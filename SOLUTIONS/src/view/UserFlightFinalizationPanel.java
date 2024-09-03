@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 public class UserFlightFinalizationPanel extends JPanel implements ActionListener {
 
     private JTextArea flightDetails;
+    private JTextArea totalPrice;
 
     private JButton bookButton;
 
@@ -26,6 +27,11 @@ public class UserFlightFinalizationPanel extends JPanel implements ActionListene
         flightDetails.setEditable(false);
         flightDetails.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
+        totalPrice = new JTextArea();
+        totalPrice.setPreferredSize(new Dimension((int) flightDetails.getPreferredSize().getWidth() / 2, 20));
+        totalPrice.setEditable(false);
+        totalPrice.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
         bookButton = new JButton("Book");
         bookButton.setActionCommand("book");
     }
@@ -37,6 +43,14 @@ public class UserFlightFinalizationPanel extends JPanel implements ActionListene
         gbc.gridx = 0;
 
         add(flightDetails, gbc);
+        gbc.gridy++;
+        gbc.insets = new Insets(10, 0, 0, 0);
+
+        add(new JLabel("Ukupna cijena:"), gbc);
+        gbc.gridy++;
+        gbc.insets = new Insets(0, 0, 0, 0);
+
+        add(totalPrice, gbc);
         gbc.gridy++;
         gbc.insets = new Insets(15, 0, 0, 0);
 
@@ -64,5 +78,13 @@ public class UserFlightFinalizationPanel extends JPanel implements ActionListene
 
     public String getText(){
         return flightDetails.getText();
+    }
+
+    public void setTotalPrice(String text){
+        totalPrice.setText(text);
+    }
+
+    public String getTotalPrice(){
+        return totalPrice.getText();
     }
 }

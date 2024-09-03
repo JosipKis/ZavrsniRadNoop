@@ -18,6 +18,7 @@ public class Kontroler {
     private static User currentUser;
     private String currentUserRole;
     private DataBase dataBase;
+    private List<Integer> classPrices;
 
     public Kontroler() {
         dataBase = new DataBase();
