@@ -47,7 +47,7 @@ public class FlightListPanel extends JPanel {
         flights = kontroler.getAllFlights();
 
         table = new JTable();
-        columnHeaders = new String[]{"Plane", "Departure", "Destination", "Departure time"};
+        columnHeaders = new String[]{"Plane", "Departure", "Destination", "Departure date", "Departure time"};
         this.abstractTableModel = initTable();
         table.setModel(abstractTableModel);
         table.getTableHeader().setReorderingAllowed(false);
@@ -88,8 +88,10 @@ public class FlightListPanel extends JPanel {
                     case 2:
                         return flight.getDestination();
                     case 3:
-                        return flight.getDepartureTime();
+                        return flight.getDepartureDate();
                     case 4:
+                        return flight.getDepartureTime();
+                    case 5:
                         return flight.getPlane();
                     default:
                         throw new IllegalArgumentException("The column index is not possible for this case.");

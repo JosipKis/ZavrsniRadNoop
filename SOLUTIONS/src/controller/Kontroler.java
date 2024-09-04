@@ -15,9 +15,10 @@ public class Kontroler {
     private static final String DB_USER = "jkis";
     private static final String DB_PASSWORD = "noop,LOZINKA101a";
 
-    private User currentUser;
+    private static User currentUser;
     private String currentUserRole;
     private DataBase dataBase;
+    private List<Integer> classPrices;
 
     public Kontroler() {
         dataBase = new DataBase();
@@ -100,13 +101,15 @@ public class Kontroler {
                         String departure = resultSet.getString("departure");
                         String destination = resultSet.getString("destination");
                         Date date = resultSet.getDate("departure_time");
+                        Time time = resultSet.getTime("departure_time");
 
                         Flight flight = new Flight();
                         flight.setFlightNumber(flightID);
                         flight.setPlane(flightPlane);
                         flight.setDeparture(departure);
                         flight.setDestination(destination);
-                        flight.setDepartureTime(String.valueOf(date));
+                        flight.setDepartureDate(String.valueOf(date));
+                        flight.setDepartureTime(String.valueOf(time));
 
                         dataBase.getFlightsFromDB(flight);
                     }
@@ -166,6 +169,11 @@ public class Kontroler {
             }
         }
         return dataBase.getChosenPlaneClasses();
+    }
+
+    public static String getCurrentUser() {
+
+        return currentUser.getUsername();
     }
 
     public String getUserRole(){

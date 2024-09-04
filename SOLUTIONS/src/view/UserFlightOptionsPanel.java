@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class UserFlightOptionsPanel extends JPanel {
 
@@ -77,8 +79,15 @@ public class UserFlightOptionsPanel extends JPanel {
         add(economyClass, gbc);
     }
 
-    private void activatePanel() {
-
+    private void activatePanel(JPanel userPanel) {
+        firstClass.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (firstClass.isSelected()){
+                    System.out.println();
+                }
+            }
+        });
     }
 
     public String getSelectedFlightClass(){
@@ -101,7 +110,6 @@ public class UserFlightOptionsPanel extends JPanel {
             economyClass.setEnabled(true);
         }
         System.out.println("First: " + first + ", Second: " + second + ", Third: " + third);
-
     }
 
     public void disableOptions(){
