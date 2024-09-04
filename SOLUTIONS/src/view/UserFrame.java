@@ -46,6 +46,7 @@ public class UserFrame extends JFrame {
             public void bookButtonClicked(String button) {
                 List<String> lista = flightListPanel.getDetailsOfFlight();
                 if (lista != null){
+                    lista.add(userPanel.getTotalPriceText());
                     dispose();
                     new Receipt4FlightFrame(lista);
                 }else {

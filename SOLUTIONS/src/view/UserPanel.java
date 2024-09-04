@@ -46,6 +46,10 @@ public class UserPanel extends JPanel {
         userFlightFinalizationPanel.setTotalPrice(totalPriceText);
     }
 
+    public String getTotalPriceText(){
+        return userFlightFinalizationPanel.getTotalPrice();
+    }
+
     public void enableSelection(int first, int second, int third){
         userFlightOptionsPanel.setEnableOptions(first, second, third);
         userFlightFinalizationPanel.setTotalPrice("0");

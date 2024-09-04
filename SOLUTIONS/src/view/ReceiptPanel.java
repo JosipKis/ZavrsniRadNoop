@@ -14,6 +14,7 @@ public class ReceiptPanel extends JPanel {
     private JTextField destinationCity;
     private JTextField takeOffDate;
     private JTextField takeOffTime;
+    private JTextField totalPaid;
 
     private List<String> flightDetails;
 
@@ -33,6 +34,7 @@ public class ReceiptPanel extends JPanel {
         destinationCity = new JTextField(flightDetails.get(2));
         takeOffDate = new JTextField(flightDetails.get(3));
         takeOffTime = new JTextField(flightDetails.get(4));
+        totalPaid = new JTextField(flightDetails.get(5));
     }
 
     private void layoutComps() {
@@ -73,5 +75,12 @@ public class ReceiptPanel extends JPanel {
         gbc.gridx++;
 
         add(takeOffTime, gbc);
+        gbc.gridx--;
+        gbc.gridy++;
+
+        add(new JLabel("Ukupna cijena: "), gbc);
+        gbc.gridx++;
+
+        add(totalPaid, gbc);
     }
 }

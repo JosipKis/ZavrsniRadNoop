@@ -93,17 +93,17 @@ public class UserFlightOptionsPanel extends JPanel {
                     if (isBusinessClassPriceApplied){
                         isBusinessClassPriceApplied = false;
                         totalMoneyToPay -= Kontroler.getClassPrices().get(1);
-                        userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                        userPanel.setTotalPriceText(totalMoneyToPay + " €");
                     }else if (isEconomyClassPriceApplied){
                         isEconomyClassPriceApplied = false;
                         totalMoneyToPay -= Kontroler.getClassPrices().get(2);
-                        userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                        userPanel.setTotalPriceText(totalMoneyToPay + " €");
                     }
 
                     if (!isFirstClassPriceApplied){
                         System.out.println(Kontroler.getClassPrices().get(0));
                         totalMoneyToPay += Kontroler.getClassPrices().get(0);
-                        userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                        userPanel.setTotalPriceText(totalMoneyToPay + " €");
                         isFirstClassPriceApplied = true;
                     }
                 }
@@ -117,17 +117,17 @@ public class UserFlightOptionsPanel extends JPanel {
                     if (isFirstClassPriceApplied){
                         isFirstClassPriceApplied = false;
                         totalMoneyToPay -= Kontroler.getClassPrices().get(0);
-                        userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                        userPanel.setTotalPriceText(totalMoneyToPay + " €");
                     }else if (isEconomyClassPriceApplied){
                         isEconomyClassPriceApplied = false;
                         totalMoneyToPay -= Kontroler.getClassPrices().get(2);
-                        userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                        userPanel.setTotalPriceText(totalMoneyToPay + " €");
                     }
 
                     if (!isBusinessClassPriceApplied){
                         System.out.println(Kontroler.getClassPrices().get(1));
                         totalMoneyToPay += Kontroler.getClassPrices().get(1);
-                        userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                        userPanel.setTotalPriceText(totalMoneyToPay + " €");
                         isBusinessClassPriceApplied = true;
                     }
                 }
@@ -140,17 +140,17 @@ public class UserFlightOptionsPanel extends JPanel {
                 if (isBusinessClassPriceApplied){
                     isBusinessClassPriceApplied = false;
                     totalMoneyToPay -= Kontroler.getClassPrices().get(1);
-                    userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                    userPanel.setTotalPriceText(totalMoneyToPay + " €");
                 }else if (isFirstClassPriceApplied) {
                     isFirstClassPriceApplied = false;
                     totalMoneyToPay -= Kontroler.getClassPrices().get(0);
-                    userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                    userPanel.setTotalPriceText(totalMoneyToPay + " €");
                 }
 
                 if (!isEconomyClassPriceApplied){
                     System.out.println(Kontroler.getClassPrices().get(2));
                     totalMoneyToPay += Kontroler.getClassPrices().get(2);
-                    userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                    userPanel.setTotalPriceText(totalMoneyToPay + " €");
                     isEconomyClassPriceApplied = true;
                 }
             }
@@ -162,10 +162,10 @@ public class UserFlightOptionsPanel extends JPanel {
                 if (handLuggage.isSelected()){
                     System.out.println("20");
                     totalMoneyToPay += 20;
-                    userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                    userPanel.setTotalPriceText(totalMoneyToPay + " €");
                 }else {
                     totalMoneyToPay -= 20;
-                    userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                    userPanel.setTotalPriceText(totalMoneyToPay + " €");
                 }
             }
         });
@@ -176,10 +176,10 @@ public class UserFlightOptionsPanel extends JPanel {
                 if (checkedLuggage.isSelected()){
                     System.out.println("70");
                     totalMoneyToPay += 70;
-                    userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                    userPanel.setTotalPriceText(totalMoneyToPay + " €");
                 }else {
                     totalMoneyToPay -= 70;
-                    userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                    userPanel.setTotalPriceText(totalMoneyToPay + " €");
                 }
             }
         });

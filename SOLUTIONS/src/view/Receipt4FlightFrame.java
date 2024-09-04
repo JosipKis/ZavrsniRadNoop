@@ -11,11 +11,14 @@ public class Receipt4FlightFrame extends JFrame {
     private ReceiptPanel receiptPanel;
     private ReceiptButtonsPanel receiptButtonsPanel;
 
+    private JLabel thankYouLabel;
+    private JLabel detailsLabel;
+
     private List<String> flightDetails;
 
     public Receipt4FlightFrame(List<String> flightDetails){
         super("Mr. KIŠ FLIGHTS");
-        setSize(350, 500);
+        setSize(350, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -29,6 +32,12 @@ public class Receipt4FlightFrame extends JFrame {
     private void initComps() {
         receiptPanel = new ReceiptPanel(flightDetails);
         receiptButtonsPanel = new ReceiptButtonsPanel();
+
+        thankYouLabel = new JLabel("Hvala vam na kupovini karte " + Kontroler.getCurrentUser() + "!");
+        thankYouLabel.setFont(new Font("Arial", Font.BOLD, 20));
+
+        detailsLabel = new JLabel("Podaci o letu:");
+        detailsLabel.setFont(new Font("Arial", Font.BOLD, 16));
     }
 
     private void layoutComps() {
@@ -36,12 +45,15 @@ public class Receipt4FlightFrame extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridy = 0;
         gbc.gridx = 0;
+        gbc.insets = new Insets(0, 0, 15, 0);
 
-        add(new JLabel("Hvala vam na kupovini karte " + Kontroler.getCurrentUser() + "!"), gbc);
+        add(thankYouLabel, gbc);
         gbc.gridy++;
+        gbc.insets = new Insets(0, 0, 20, 0);
 
-        add(new JLabel("Podaci o letu:"), gbc);
+        add(detailsLabel, gbc);
         gbc.gridy++;
+        gbc.insets = new Insets(0, 0, 0, 0);
 
         add(receiptPanel, gbc);
         gbc.gridy++;
