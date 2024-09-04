@@ -35,6 +35,26 @@ public class ReceiptPanel extends JPanel {
         takeOffDate = new JTextField(flightDetails.get(3));
         takeOffTime = new JTextField(flightDetails.get(4));
         totalPaid = new JTextField(flightDetails.get(5));
+
+        plane.setEditable(false);
+        takeOffCity.setEditable(false);
+        destinationCity.setEditable(false);
+        takeOffDate.setEditable(false);
+        takeOffTime.setEditable(false);
+        totalPaid.setEditable(false);
+
+        plane.setPreferredSize(new Dimension(takeOffDate.getPreferredSize().width, takeOffDate.getPreferredSize().height));
+        takeOffCity.setPreferredSize(new Dimension(takeOffDate.getPreferredSize().width, takeOffDate.getPreferredSize().height));
+        destinationCity.setPreferredSize(new Dimension(takeOffDate.getPreferredSize().width, takeOffDate.getPreferredSize().height));
+        takeOffTime.setPreferredSize(new Dimension(takeOffDate.getPreferredSize().width, takeOffDate.getPreferredSize().height));
+        totalPaid.setPreferredSize(new Dimension(takeOffDate.getPreferredSize().width, takeOffDate.getPreferredSize().height));
+
+        plane.setHorizontalAlignment(JTextField.CENTER);
+        takeOffCity.setHorizontalAlignment(JTextField.CENTER);
+        destinationCity.setHorizontalAlignment(JTextField.CENTER);
+        takeOffDate.setHorizontalAlignment(JTextField.CENTER);
+        takeOffTime.setHorizontalAlignment(JTextField.CENTER);
+        totalPaid.setHorizontalAlignment(JTextField.CENTER);
     }
 
     private void layoutComps() {
@@ -49,6 +69,7 @@ public class ReceiptPanel extends JPanel {
         add(plane, gbc);
         gbc.gridx--;
         gbc.gridy++;
+        gbc.insets = new Insets(0, 0, 3, 0);
 
         add(new JLabel("Polazni grad: "), gbc);
         gbc.gridx++;

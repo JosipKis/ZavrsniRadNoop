@@ -52,11 +52,15 @@ public class UserPanel extends JPanel {
 
     public void enableSelection(int first, int second, int third){
         userFlightOptionsPanel.setEnableOptions(first, second, third);
-        userFlightFinalizationPanel.setTotalPrice("0");
+        userFlightFinalizationPanel.setTotalPrice("0 €");
         userFlightOptionsPanel.setTotalMoneyToPay(0);
     }
 
     public void disableOptions(){
         userFlightOptionsPanel.disableOptions();
+    }
+
+    public boolean isAClassSelected(){
+        return userFlightOptionsPanel.getIsAClassSelected();
     }
 }

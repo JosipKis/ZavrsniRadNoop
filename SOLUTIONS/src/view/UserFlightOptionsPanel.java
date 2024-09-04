@@ -226,8 +226,12 @@ public class UserFlightOptionsPanel extends JPanel {
         isEconomyClassPriceApplied = false;
     }
 
-    public int getTotalMoneyToPay() {
-        return totalMoneyToPay;
+    public boolean getIsAClassSelected() {
+        if (isFirstClassPriceApplied || isBusinessClassPriceApplied || isEconomyClassPriceApplied){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     public void setTotalMoneyToPay(int totalMoneyToPay) {

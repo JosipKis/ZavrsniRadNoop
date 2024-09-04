@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class UserFlightFinalizationPanel extends JPanel implements ActionListener {
 
     private JTextArea flightDetails;
-    private JTextArea totalPrice;
+    private JTextField totalPrice;
 
     private JButton bookButton;
 
@@ -27,10 +27,12 @@ public class UserFlightFinalizationPanel extends JPanel implements ActionListene
         flightDetails.setEditable(false);
         flightDetails.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        totalPrice = new JTextArea();
+        totalPrice = new JTextField();
         totalPrice.setPreferredSize(new Dimension((int) flightDetails.getPreferredSize().getWidth() / 2, 20));
         totalPrice.setEditable(false);
         totalPrice.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        totalPrice.setHorizontalAlignment(JTextField.CENTER);
+        totalPrice.setText("0 €");
 
         bookButton = new JButton("Book");
         bookButton.setActionCommand("book");

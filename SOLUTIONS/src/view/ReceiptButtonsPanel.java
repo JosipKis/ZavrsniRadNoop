@@ -32,11 +32,13 @@ public class ReceiptButtonsPanel extends JPanel implements ActionListener {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridy = 0;
         gbc.gridx = 0;
-
-        add(print2PDFBtn, gbc);
-        gbc.gridy++;
+        gbc.insets = new Insets(5, 0, 0, 0);
 
         add(confirmBtn, gbc);
+        gbc.gridy++;
+        gbc.insets = new Insets(10, 0, 0, 0);
+
+        add(print2PDFBtn, gbc);
     }
 
     private void activateComps() {

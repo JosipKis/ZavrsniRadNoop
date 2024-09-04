@@ -45,12 +45,12 @@ public class UserFrame extends JFrame {
             @Override
             public void bookButtonClicked(String button) {
                 List<String> lista = flightListPanel.getDetailsOfFlight();
-                if (lista != null){
+                if (lista != null && userPanel.isAClassSelected()){
                     lista.add(userPanel.getTotalPriceText());
                     dispose();
                     new Receipt4FlightFrame(lista);
                 }else {
-                    JOptionPane.showMessageDialog(null, "Molimo odaberite let prije rezervacije karte!", "Greška: let nije odabran!", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Molimo odaberite let i željenu klasu prije rezervacije karte!", "Greška: let nije odabran!", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
