@@ -18,11 +18,15 @@ public class UserFlightOptionsPanel extends JPanel {
     private JRadioButton economyClass;
     private ButtonGroup buttonGroup;
 
+    private int totalMoneyToPay = 0;
+    private boolean isFirstClassPriceApplied = false;
+    private boolean isBusinessClassPriceApplied = false;
+    private boolean isEconomyClassPriceApplied = false;
+
     public UserFlightOptionsPanel(){
         super();
         initComps();
         layoutComps();
-        activatePanel();
     }
 
     private void initComps() {
@@ -81,12 +85,27 @@ public class UserFlightOptionsPanel extends JPanel {
         add(economyClass, gbc);
     }
 
-    private void activatePanel() {
+    public void activatePanel(UserPanel userPanel) {
         firstClass.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (firstClass.isSelected()){
-                    System.out.println(Kontroler.getClassPrices().get(0));
+                    if (isBusinessClassPriceApplied){
+                        isBusinessClassPriceApplied = false;
+                        totalMoneyToPay -= Kontroler.getClassPrices().get(1);
+                        userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                    }else if (isEconomyClassPriceApplied){
+                        isEconomyClassPriceApplied = false;
+                        totalMoneyToPay -= Kontroler.getClassPrices().get(2);
+                        userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                    }
+
+                    if (!isFirstClassPriceApplied){
+                        System.out.println(Kontroler.getClassPrices().get(0));
+                        totalMoneyToPay += Kontroler.getClassPrices().get(0);
+                        userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                        isFirstClassPriceApplied = true;
+                    }
                 }
             }
         });
@@ -95,7 +114,22 @@ public class UserFlightOptionsPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (businessClass.isSelected()){
-                    System.out.println(Kontroler.getClassPrices().get(1));
+                    if (isFirstClassPriceApplied){
+                        isFirstClassPriceApplied = false;
+                        totalMoneyToPay -= Kontroler.getClassPrices().get(0);
+                        userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                    }else if (isEconomyClassPriceApplied){
+                        isEconomyClassPriceApplied = false;
+                        totalMoneyToPay -= Kontroler.getClassPrices().get(2);
+                        userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                    }
+
+                    if (!isBusinessClassPriceApplied){
+                        System.out.println(Kontroler.getClassPrices().get(1));
+                        totalMoneyToPay += Kontroler.getClassPrices().get(1);
+                        userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                        isBusinessClassPriceApplied = true;
+                    }
                 }
             }
         });
@@ -103,8 +137,49 @@ public class UserFlightOptionsPanel extends JPanel {
         economyClass.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (economyClass.isSelected()){
+                if (isBusinessClassPriceApplied){
+                    isBusinessClassPriceApplied = false;
+                    totalMoneyToPay -= Kontroler.getClassPrices().get(1);
+                    userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                }else if (isFirstClassPriceApplied) {
+                    isFirstClassPriceApplied = false;
+                    totalMoneyToPay -= Kontroler.getClassPrices().get(0);
+                    userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                }
+
+                if (!isEconomyClassPriceApplied){
                     System.out.println(Kontroler.getClassPrices().get(2));
+                    totalMoneyToPay += Kontroler.getClassPrices().get(2);
+                    userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                    isEconomyClassPriceApplied = true;
+                }
+            }
+        });
+
+        handLuggage.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (handLuggage.isSelected()){
+                    System.out.println("20");
+                    totalMoneyToPay += 20;
+                    userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                }else {
+                    totalMoneyToPay -= 20;
+                    userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                }
+            }
+        });
+
+        checkedLuggage.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (checkedLuggage.isSelected()){
+                    System.out.println("70");
+                    totalMoneyToPay += 70;
+                    userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
+                }else {
+                    totalMoneyToPay -= 70;
+                    userPanel.setTotalPriceText(String.valueOf(totalMoneyToPay));
                 }
             }
         });
@@ -145,5 +220,17 @@ public class UserFlightOptionsPanel extends JPanel {
         economyClass.setSelected(false);
 
         buttonGroup.clearSelection();
+
+        isFirstClassPriceApplied = false;
+        isBusinessClassPriceApplied = false;
+        isEconomyClassPriceApplied = false;
+    }
+
+    public int getTotalMoneyToPay() {
+        return totalMoneyToPay;
+    }
+
+    public void setTotalMoneyToPay(int totalMoneyToPay) {
+        this.totalMoneyToPay = totalMoneyToPay;
     }
 }
