@@ -5,6 +5,7 @@ import model.Flight;
 import model.User;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Kontroler {
@@ -18,10 +19,11 @@ public class Kontroler {
     private static User currentUser;
     private String currentUserRole;
     private DataBase dataBase;
-    private List<Integer> classPrices;
+    private static List<Integer> classPrices;
 
     public Kontroler() {
         dataBase = new DataBase();
+        classPrices = new ArrayList<>();
     }
 
     public void connectToDatabase() {
@@ -153,6 +155,7 @@ public class Kontroler {
                     System.out.println("2nd");
                     while (resultSet.next()){
                         dataBase.resetPlaneClasses();
+                        classPrices.clear();
 
                         int isFirstClass = resultSet.getInt("firstClass");
                         int isBusinessClass = resultSet.getInt("businessClass");
@@ -161,6 +164,10 @@ public class Kontroler {
                         dataBase.addPlaneClasses(isFirstClass);
                         dataBase.addPlaneClasses(isBusinessClass);
                         dataBase.addPlaneClasses(isEconomy);
+
+                        classPrices.add(isFirstClass);
+                        classPrices.add(isBusinessClass);
+                        classPrices.add(isEconomy);
                     }
                 }
 
@@ -178,5 +185,9 @@ public class Kontroler {
 
     public String getUserRole(){
         return currentUserRole;
+    }
+
+    public static List<Integer> getClassPrices() {
+        return classPrices;
     }
 }

@@ -1,5 +1,7 @@
 package view;
 
+import controller.Kontroler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -79,12 +81,30 @@ public class UserFlightOptionsPanel extends JPanel {
         add(economyClass, gbc);
     }
 
-    private void activatePanel(JPanel userPanel) {
+    private void activatePanel() {
         firstClass.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (firstClass.isSelected()){
-                    System.out.println();
+                    System.out.println(Kontroler.getClassPrices().get(0));
+                }
+            }
+        });
+
+        businessClass.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (businessClass.isSelected()){
+                    System.out.println(Kontroler.getClassPrices().get(1));
+                }
+            }
+        });
+
+        economyClass.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (economyClass.isSelected()){
+                    System.out.println(Kontroler.getClassPrices().get(2));
                 }
             }
         });
@@ -114,9 +134,16 @@ public class UserFlightOptionsPanel extends JPanel {
 
     public void disableOptions(){
         handLuggage.setEnabled(false);
+        handLuggage.setSelected(false);
         checkedLuggage.setEnabled(false);
+        checkedLuggage.setSelected(false);
         firstClass.setEnabled(false);
+        firstClass.setSelected(false);
         businessClass.setEnabled(false);
+        businessClass.setSelected(false);
         economyClass.setEnabled(false);
+        economyClass.setSelected(false);
+
+        buttonGroup.clearSelection();
     }
 }
