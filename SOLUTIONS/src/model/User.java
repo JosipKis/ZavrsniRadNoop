@@ -2,6 +2,7 @@ package model;
 
 public class User {
 
+    private int id;
     private String username;
     private String password;
 
@@ -18,4 +19,20 @@ public class User {
 
     public void setPassword(String password) { this.password = password; }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

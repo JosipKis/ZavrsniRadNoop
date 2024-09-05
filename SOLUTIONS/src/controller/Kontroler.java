@@ -2,6 +2,7 @@ package controller;
 
 import model.DataBase;
 import model.Flight;
+import model.Ticket;
 import model.User;
 
 import java.sql.*;
@@ -60,6 +61,7 @@ public class Kontroler {
         if (resultSet.next()) {
             String role = resultSet.getString("role");
             currentUser = new User(username, password);
+            currentUser.setId(resultSet.getInt("id"));
             dataBase.setCurrentUser(currentUser);
             if (role.equals("admin")){
                 System.out.println("Admin");
@@ -74,7 +76,6 @@ public class Kontroler {
             System.out.println("Neuspjesna prijava!");
             return false;
         }
-
     }
 
     public void registerNewUser(String username, String password, int age){
@@ -178,9 +179,46 @@ public class Kontroler {
         return dataBase.getChosenPlaneClasses();
     }
 
-    public static String getCurrentUser() {
+    public List<Ticket> getAllTicketsByID(int id){
+        dataBase.resetTicketsList();
+        if (con != null) {
+            String query = "SELECT * FROM ticket WHERE userID = ?;";
 
+            try (PreparedStatement ps = con.prepareStatement(query)){
+                ps.setInt(1, id);
+
+                try (ResultSet resultSet = ps.executeQuery()) {
+                    while (resultSet.next()){
+
+                        Ticket ticket = new Ticket();
+
+                        ticket.setId(resultSet.getInt("id"));
+                        ticket.setUserId(resultSet.getInt("userID"));
+                        ticket.setPlane(resultSet.getString("plane"));
+                        ticket.setTakeOffCity(resultSet.getString("takeOffCity"));
+                        ticket.setDestinationCity(resultSet.getString("destinationCity"));
+                        ticket.setStartDate(resultSet.getString("startDate"));
+                        ticket.setStartTime(resultSet.getString("startTime"));
+                        ticket.setTotalPrice(resultSet.getString("totalPrice"));
+
+                        dataBase.addTickets4User(ticket);
+                        System.out.println(ticket.toString());
+                    }
+                }
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return dataBase.getTicketsByUser();
+    }
+
+    public static String getCurrentUser() {
         return currentUser.getUsername();
+    }
+
+    public static int getCurrentUserID() {
+        return currentUser.getId();
     }
 
     public String getUserRole(){

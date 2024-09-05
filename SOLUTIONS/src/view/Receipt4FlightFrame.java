@@ -16,6 +16,8 @@ public class Receipt4FlightFrame extends JFrame {
 
     private List<String> flightDetails;
 
+    Kontroler kontroler;
+
     public Receipt4FlightFrame(List<String> flightDetails){
         super("Mr. KIŠ FLIGHTS");
         setSize(350, 400);
@@ -30,6 +32,9 @@ public class Receipt4FlightFrame extends JFrame {
     }
 
     private void initComps() {
+        kontroler = new Kontroler();
+        kontroler.connectToDatabase(); //maybe will need to be removed, check later
+
         receiptPanel = new ReceiptPanel(flightDetails);
         receiptButtonsPanel = new ReceiptButtonsPanel();
 
@@ -72,6 +77,8 @@ public class Receipt4FlightFrame extends JFrame {
             @Override
             public void confirm() {
                 System.out.println("Confirm");
+                int id = Kontroler.getCurrentUserID();
+                kontroler.getAllTicketsByID(id);
             }
         });
     }

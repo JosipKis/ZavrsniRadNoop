@@ -9,10 +9,12 @@ public class DataBase {
     private List<Flight> flights;
     private String planeName;
     private List<Integer> chosenPlaneClasses;
+    private List<Ticket> ticketsByUser;
 
     public DataBase() {
         flights = new ArrayList<>();
         chosenPlaneClasses = new ArrayList<>();
+        ticketsByUser = new ArrayList<>();
         planeName = "";
     }
 
@@ -59,5 +61,17 @@ public class DataBase {
 
     public List<Integer> getChosenPlaneClasses(){
         return chosenPlaneClasses;
+    }
+
+    public List<Ticket> getTicketsByUser() {
+        return ticketsByUser;
+    }
+
+    public void resetTicketsList(){
+        ticketsByUser.clear();
+    }
+
+    public void addTickets4User(Ticket ticket) {
+        ticketsByUser.add(ticket);
     }
 }
