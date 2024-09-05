@@ -79,6 +79,8 @@ public class Receipt4FlightFrame extends JFrame {
                 System.out.println("Confirm");
                 int id = Kontroler.getCurrentUserID();
                 kontroler.getAllTicketsByID(id);
+//                dispose();
+//                new UserFrame();
             }
         });
     }

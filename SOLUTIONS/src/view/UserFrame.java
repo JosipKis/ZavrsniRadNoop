@@ -1,5 +1,7 @@
 package view;
 
+import controller.Kontroler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
@@ -8,6 +10,8 @@ public class UserFrame extends JFrame {
 
     private UserPanel userPanel;
     private FlightListPanel flightListPanel;
+
+    private Kontroler kontroler;
 
     public UserFrame() {
         super("Mr. KIŠ FLIGHTS");
@@ -22,6 +26,9 @@ public class UserFrame extends JFrame {
     }
 
     private void initComps() {
+        kontroler = new Kontroler();
+        kontroler.connectToDatabase();
+
         userPanel = new UserPanel();
         userPanel.setPreferredSize(new Dimension(690, 210));
         userPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -47,6 +54,7 @@ public class UserFrame extends JFrame {
                 List<String> lista = flightListPanel.getDetailsOfFlight();
                 if (lista != null && userPanel.isAClassSelected()){
                     lista.add(userPanel.getTotalPriceText());
+                    kontroler.addTicketToDb(lista);
                     dispose();
                     new Receipt4FlightFrame(lista);
                 }else {

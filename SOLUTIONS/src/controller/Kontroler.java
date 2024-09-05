@@ -213,6 +213,30 @@ public class Kontroler {
         return dataBase.getTicketsByUser();
     }
 
+    public void addTicketToDb(List<String> ticketDetails){
+        if (con != null) {
+            try {
+                String query = "INSERT INTO ticket (userID, plane, takeOffCity, destinationCity, startDate, startTime, totalPrice) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?);";
+
+                PreparedStatement ps = con.prepareStatement(query);
+
+                ps.setString(1, String.valueOf(getCurrentUserID()));
+                ps.setString(2, ticketDetails.get(0));
+                ps.setString(3, ticketDetails.get(1));
+                ps.setString(4, ticketDetails.get(2));
+                ps.setString(5, ticketDetails.get(3));
+                ps.setString(6, ticketDetails.get(4));
+                ps.setString(7, ticketDetails.get(5));
+
+                ps.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     public static String getCurrentUser() {
         return currentUser.getUsername();
     }
