@@ -1,6 +1,7 @@
 package view;
 
 import controller.Kontroler;
+import model.Print2PDF;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,9 +15,9 @@ public class Receipt4FlightFrame extends JFrame {
     private JLabel thankYouLabel;
     private JLabel detailsLabel;
 
-    private List<String> flightDetails;
+    private Print2PDF print2PDF;
 
-    Kontroler kontroler;
+    private List<String> flightDetails;
 
     public Receipt4FlightFrame(List<String> flightDetails){
         super("Mr. KIŠ FLIGHTS");
@@ -32,9 +33,6 @@ public class Receipt4FlightFrame extends JFrame {
     }
 
     private void initComps() {
-        kontroler = new Kontroler();
-        kontroler.connectToDatabase(); //maybe will need to be removed, check later
-
         receiptPanel = new ReceiptPanel(flightDetails);
         receiptButtonsPanel = new ReceiptButtonsPanel();
 
@@ -71,16 +69,14 @@ public class Receipt4FlightFrame extends JFrame {
 
             @Override
             public void print2PDF() {
-                System.out.println("Print to PDF");
+                JOptionPane.showMessageDialog(null, "PDF karta uspiješno isprintana!", "Uspiješno printanje", JOptionPane.INFORMATION_MESSAGE);
+                print2PDF = new Print2PDF(flightDetails);
             }
 
             @Override
             public void confirm() {
-                System.out.println("Confirm");
-                int id = Kontroler.getCurrentUserID();
-                kontroler.getAllTicketsByID(id);
-//                dispose();
-//                new UserFrame();
+                dispose();
+                new UserFrame();
             }
         });
     }
