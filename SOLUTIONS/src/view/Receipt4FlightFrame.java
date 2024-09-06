@@ -4,7 +4,9 @@ import controller.Kontroler;
 import model.Print2PDF;
 
 import javax.swing.*;
+import javax.swing.border.EtchedBorder;
 import java.awt.*;
+import java.net.URL;
 import java.util.List;
 
 public class Receipt4FlightFrame extends JFrame {
@@ -26,6 +28,10 @@ public class Receipt4FlightFrame extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         setResizable(false);
+        URL iconURL = getClass().getResource("icons/airplane.png");
+        assert iconURL != null;
+        ImageIcon icon = new ImageIcon(iconURL);
+        setIconImage(icon.getImage());
         this.flightDetails = flightDetails;
         initComps();
         layoutComps();
@@ -34,6 +40,7 @@ public class Receipt4FlightFrame extends JFrame {
 
     private void initComps() {
         receiptPanel = new ReceiptPanel(flightDetails);
+        receiptPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
         receiptButtonsPanel = new ReceiptButtonsPanel();
 
         thankYouLabel = new JLabel("Hvala vam na kupovini karte " + Kontroler.getCurrentUser() + "!");

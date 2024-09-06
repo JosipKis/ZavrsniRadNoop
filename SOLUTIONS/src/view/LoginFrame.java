@@ -3,6 +3,7 @@ package view;
 import controller.Kontroler;
 
 import javax.swing.*;
+import java.net.URL;
 import java.sql.SQLException;
 
 public class LoginFrame extends JFrame {
@@ -18,6 +19,10 @@ public class LoginFrame extends JFrame {
         setResizable(false);
         setSize(300,400);
         setLocationRelativeTo(null);
+        URL iconURL = getClass().getResource("icons/airplane.png");
+        assert iconURL != null;
+        ImageIcon icon = new ImageIcon(iconURL);
+        setIconImage(icon.getImage());
         initComps();
         layoutComps();
         activateLoginFrame();

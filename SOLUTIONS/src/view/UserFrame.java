@@ -4,6 +4,7 @@ import controller.Kontroler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 import java.util.List;
 
 public class UserFrame extends JFrame {
@@ -20,6 +21,10 @@ public class UserFrame extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         setResizable(false);
+        URL iconURL = getClass().getResource("icons/airplane.png");
+        assert iconURL != null;
+        ImageIcon icon = new ImageIcon(iconURL);
+        setIconImage(icon.getImage());
         initComps();
         layoutComps();
         activateUserFrame();

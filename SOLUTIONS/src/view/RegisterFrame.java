@@ -3,6 +3,7 @@ package view;
 import controller.Kontroler;
 
 import javax.swing.*;
+import java.net.URL;
 
 public class RegisterFrame extends JFrame {
 
@@ -17,6 +18,10 @@ public class RegisterFrame extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         setResizable(false);
+        URL iconURL = getClass().getResource("icons/airplane.png");
+        assert iconURL != null;
+        ImageIcon icon = new ImageIcon(iconURL);
+        setIconImage(icon.getImage());
         initComps();
         layoutComps();
         activateFrame();

@@ -1,7 +1,6 @@
 package view;
 
 import controller.Kontroler;
-import model.Flight;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,17 +36,24 @@ public class ReceiptPanel extends JPanel {
         totalPaid = new JTextField(flightDetails.get(5));
 
         plane.setEditable(false);
+        plane.setFocusable(false);
         takeOffCity.setEditable(false);
+        takeOffCity.setFocusable(false);
         destinationCity.setEditable(false);
+        destinationCity.setFocusable(false);
         takeOffDate.setEditable(false);
+        takeOffDate.setFocusable(false);
         takeOffTime.setEditable(false);
+        takeOffTime.setFocusable(false);
         totalPaid.setEditable(false);
+        totalPaid.setFocusable(false);
 
-        plane.setPreferredSize(new Dimension(takeOffDate.getPreferredSize().width, takeOffDate.getPreferredSize().height));
-        takeOffCity.setPreferredSize(new Dimension(takeOffDate.getPreferredSize().width, takeOffDate.getPreferredSize().height));
-        destinationCity.setPreferredSize(new Dimension(takeOffDate.getPreferredSize().width, takeOffDate.getPreferredSize().height));
-        takeOffTime.setPreferredSize(new Dimension(takeOffDate.getPreferredSize().width, takeOffDate.getPreferredSize().height));
-        totalPaid.setPreferredSize(new Dimension(takeOffDate.getPreferredSize().width, takeOffDate.getPreferredSize().height));
+        plane.setPreferredSize(new Dimension(takeOffDate.getPreferredSize().width + 20, takeOffDate.getPreferredSize().height));
+        takeOffCity.setPreferredSize(new Dimension(takeOffDate.getPreferredSize().width + 20, takeOffDate.getPreferredSize().height));
+        destinationCity.setPreferredSize(new Dimension(takeOffDate.getPreferredSize().width + 20, takeOffDate.getPreferredSize().height));
+        takeOffTime.setPreferredSize(new Dimension(takeOffDate.getPreferredSize().width + 20, takeOffDate.getPreferredSize().height));
+        totalPaid.setPreferredSize(new Dimension(takeOffDate.getPreferredSize().width + 20, takeOffDate.getPreferredSize().height));
+        takeOffDate.setPreferredSize(new Dimension(takeOffDate.getPreferredSize().width + 20, takeOffDate.getPreferredSize().height));
 
         plane.setHorizontalAlignment(JTextField.CENTER);
         takeOffCity.setHorizontalAlignment(JTextField.CENTER);
