@@ -1,16 +1,25 @@
 package view;
 
 import controller.Kontroler;
+import view.icons.UserPanelListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.List;
 
-public class UserFrame extends JFrame {
+public class UserFrame extends JFrame implements ActionListener {
 
     private UserPanel userPanel;
     private FlightListPanel flightListPanel;
+
+    private JMenuBar menuBar;
+    private JMenu jMenu;
+    private JMenuItem odjavaBtn;
+
+    private UserPanelListener userPanelListener;
 
     private Kontroler kontroler;
 
@@ -42,6 +51,18 @@ public class UserFrame extends JFrame {
         flightListPanel.setPreferredSize(new Dimension(300, 250));
 
         flightListPanel.activateTable(flightListPanel.getDaTable(), userPanel);
+
+        menuBar = new JMenuBar();
+        menuBar.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        jMenu = new JMenu("IZBORNIK");
+        odjavaBtn = new JMenuItem("ODJAVA");
+        odjavaBtn.setActionCommand("odjava");
+        odjavaBtn.addActionListener(this);
+
+        menuBar.add(jMenu);
+        jMenu.add(odjavaBtn);
+
+        setJMenuBar(menuBar);
     }
 
     private void layoutComps() {
@@ -67,5 +88,13 @@ public class UserFrame extends JFrame {
                 }
             }
         });
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().equals("odjava")) {
+            dispose();
+            new LoginFrame();
+        }
     }
 }
