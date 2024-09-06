@@ -237,6 +237,41 @@ public class Kontroler {
         }
     }
 
+    public String getUsersTheme(int id) {
+        if (con != null) {
+            String query = "SELECT theme FROM User WHERE id = ?;";
+            try {
+                PreparedStatement ps = con.prepareStatement(query);
+                ps.setInt(1, id);
+
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    String theme = rs.getString("theme");
+                    System.out.println("Theme fetched: " + theme);
+                    return theme;
+                }
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return "light";
+    }
+
+    public void setUsersThemeInDB(String theme, int id) {
+        if (con != null) {
+            String query = "UPDATE User SET theme = ? WHERE id = ?;";
+            try {
+                PreparedStatement ps = con.prepareStatement(query);
+                ps.setString(1, theme);
+                ps.setInt(2, id);
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     public static String getCurrentUser() {
         return currentUser.getUsername();
     }

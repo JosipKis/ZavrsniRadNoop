@@ -1,5 +1,7 @@
 package view;
 
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import controller.Kontroler;
 import view.icons.UserPanelListener;
 
@@ -18,6 +20,9 @@ public class UserFrame extends JFrame implements ActionListener {
     private JMenuBar menuBar;
     private JMenu jMenu;
     private JMenuItem odjavaBtn;
+    private JRadioButtonMenuItem lightThemeRB;
+    private JRadioButtonMenuItem darkThemeRB;
+    private ButtonGroup buttonGroup;
 
     private UserPanelListener userPanelListener;
 
@@ -55,11 +60,28 @@ public class UserFrame extends JFrame implements ActionListener {
         menuBar = new JMenuBar();
         menuBar.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         jMenu = new JMenu("IZBORNIK");
+
         odjavaBtn = new JMenuItem("ODJAVA");
         odjavaBtn.setActionCommand("odjava");
         odjavaBtn.addActionListener(this);
 
+        lightThemeRB = new JRadioButtonMenuItem("Svijetla tema");
+        lightThemeRB.setActionCommand("lightTheme");
+        lightThemeRB.addActionListener(this);
+
+        darkThemeRB = new JRadioButtonMenuItem("Tamna tema");
+        darkThemeRB.setActionCommand("darkTheme");
+        darkThemeRB.addActionListener(this);
+
+        buttonGroup = new ButtonGroup();
+        buttonGroup.add(lightThemeRB);
+        buttonGroup.add(darkThemeRB);
+        determineUsersTheme();
+
         menuBar.add(jMenu);
+        jMenu.add(lightThemeRB);
+        jMenu.add(darkThemeRB);
+        jMenu.addSeparator();
         jMenu.add(odjavaBtn);
 
         setJMenuBar(menuBar);
@@ -71,6 +93,10 @@ public class UserFrame extends JFrame implements ActionListener {
         add(userPanel, BorderLayout.SOUTH);
 
         add(flightListPanel, BorderLayout.NORTH);
+
+        SwingUtilities.updateComponentTreeUI(this);
+        revalidate();
+        repaint();
     }
 
     private void activateUserFrame() {
@@ -92,9 +118,47 @@ public class UserFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("odjava")) {
-            dispose();
-            new LoginFrame();
+        switch (e.getActionCommand()) {
+            case "odjava":
+                dispose();
+                new LoginFrame();
+                break;
+
+            case "lightTheme":
+                System.out.println("Light theme selected");
+                kontroler.setUsersThemeInDB("light", Kontroler.getCurrentUserID());
+                determineUsersTheme();
+                break;
+
+            case "darkTheme":
+                System.out.println("Dark theme selected");
+                kontroler.setUsersThemeInDB("dark", Kontroler.getCurrentUserID());
+                determineUsersTheme();
+                break;
         }
+    }
+
+    private void determineUsersTheme() {
+        String userTheme = kontroler.getUsersTheme(Kontroler.getCurrentUserID());
+
+        if (userTheme.equals("light")) {
+            lightThemeRB.setSelected(true);
+            try {
+                UIManager.setLookAndFeel(new FlatMacLightLaf());
+            } catch (Exception ex) {
+                System.err.println("Failed to initialize LaF");
+            }
+        } else if (userTheme.equals("dark")) {
+            darkThemeRB.setSelected(true);
+            try {
+                UIManager.setLookAndFeel(new FlatMacDarkLaf());
+            } catch (Exception ex) {
+                System.err.println("Failed to initialize LaF");
+            }
+        }
+
+        SwingUtilities.updateComponentTreeUI(this);
+        revalidate();
+        repaint();
     }
 }
