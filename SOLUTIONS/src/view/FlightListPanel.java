@@ -67,7 +67,7 @@ public class FlightListPanel extends JPanel implements TableOfFlights {
 
     private AbstractTableModel initTable() {
 
-        AbstractTableModel tableModel = new AbstractTableModel() {
+         AbstractTableModel abstractTableModel = new AbstractTableModel() {
             @Override
             public int getRowCount() {
                 return flights.size();
@@ -106,7 +106,7 @@ public class FlightListPanel extends JPanel implements TableOfFlights {
             }
         };
 
-        return tableModel;
+        return abstractTableModel;
     }
 
     public void activateTable(JTable someTable, UserPanel userPanel) {
@@ -114,28 +114,36 @@ public class FlightListPanel extends JPanel implements TableOfFlights {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    JTable target = (JTable)e.getSource();
+                    JTable target = (JTable) e.getSource();
                     int row = target.getSelectedRow();
+
+                    Flight selectedFlight = flights.get(row);
                     flightSelection = new StringBuilder();
                     flightDetails = new ArrayList<>();
                     planeClasses = new ArrayList<>();
 
-                    for (int column = 0; column < target.getColumnCount(); column++) {
-                        Object value = target.getValueAt(row, column);
-                        flightSelection.append(value).append("\n");
-                        flightDetails.add(value.toString());
-                    }
+                    flightSelection.append(selectedFlight.getPlane()).append("\n")
+                            .append(selectedFlight.getDeparture()).append("\n")
+                            .append(selectedFlight.getDestination()).append("\n")
+                            .append(selectedFlight.getDepartureDate()).append("\n")
+                            .append(selectedFlight.getDepartureTime()).append("\n");
+
+                    flightDetails.add(selectedFlight.getPlane());
+                    flightDetails.add(selectedFlight.getDeparture());
+                    flightDetails.add(selectedFlight.getDestination());
+                    flightDetails.add(selectedFlight.getDepartureDate());
+                    flightDetails.add(selectedFlight.getDepartureTime());
 
                     if (userPanel != null) {
                         userPanel.setText(flightSelection.toString());
-                        planeClasses = kontroler.getPlaneClasses(target.getValueAt(row, 0).toString());
-                        System.out.println(target.getValueAt(row, 0));
+                        planeClasses = kontroler.getPlaneClasses(selectedFlight.getFlightNumber());
                         userPanel.disableOptions();
                         userPanel.enableSelection(planeClasses.get(0), planeClasses.get(1), planeClasses.get(2));
                     }
                 }
             }
         });
+
     }
 
     public StringBuilder getFlightSelection(){
@@ -155,15 +163,12 @@ public class FlightListPanel extends JPanel implements TableOfFlights {
     }
 
     public void sortFlightsByDateAndTime() {
-        System.out.println("Comparing....");
-        // Create a comparator for sorting
         Comparator<Flight> flightComparator = new Comparator<Flight>() {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
 
             @Override
             public int compare(Flight f1, Flight f2) {
-                // Compare dates first
                 try {
                     Date date1 = dateFormat.parse(f1.getDepartureDate());
                     Date date2 = dateFormat.parse(f2.getDepartureDate());
@@ -173,7 +178,6 @@ public class FlightListPanel extends JPanel implements TableOfFlights {
                         return dateComparison;
                     }
 
-                    // If dates are the same, compare times
                     Date time1 = timeFormat.parse(f1.getDepartureTime());
                     Date time2 = timeFormat.parse(f2.getDepartureTime());
                     return time1.compareTo(time2);
@@ -187,9 +191,5 @@ public class FlightListPanel extends JPanel implements TableOfFlights {
 
         flights.sort(flightComparator);
         abstractTableModel.fireTableDataChanged();
-    }
-
-    public void resetTable(){
-
     }
 }

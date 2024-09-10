@@ -38,6 +38,7 @@ public class UserFlightOptionsPanel extends JPanel implements ActionListener {
         comboBoxContents = new String[]{"Odaberite...", "Najnovije gore"};
         flightsComboBox = new JComboBox<>(comboBoxContents);
         flightsComboBox.setPreferredSize(new Dimension(100, 30));
+        flightsComboBox.addActionListener(this);
 
         handLuggage = new JCheckBox("Hand Luggage");
         handLuggage.setEnabled(false);
@@ -92,7 +93,6 @@ public class UserFlightOptionsPanel extends JPanel implements ActionListener {
     }
 
     public void activatePanel(UserPanel userPanel) {
-        flightsComboBox.addActionListener(this);
         firstClass.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -245,10 +245,6 @@ public class UserFlightOptionsPanel extends JPanel implements ActionListener {
         this.totalMoneyToPay = totalMoneyToPay;
     }
 
-    public JComboBox getComboBox(){
-        return flightsComboBox;
-    }
-
     public void setComboBoxListener(ComboBoxListener comboBoxListener){
         this.comboBoxListener = comboBoxListener;
     }
@@ -256,7 +252,7 @@ public class UserFlightOptionsPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (comboBoxListener != null){
-            comboBoxListener.comboBoxPressed();
+            comboBoxListener.comboBoxPressed(String.valueOf(flightsComboBox.getSelectedItem()));
         }
     }
 }

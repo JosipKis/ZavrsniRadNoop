@@ -1,5 +1,8 @@
 package view;
 
+import controller.command.CommandInvoker;
+import controller.command.SortByEarliestCommand;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,6 +12,8 @@ public class UserPanel extends JPanel {
     private UserFlightFinalizationPanel userFlightFinalizationPanel;
 
     private FlightListPanel flightListPanel;
+
+    private CommandInvoker commandInvoker;
 
     public UserPanel(FlightListPanel flightListPanel) {
         super();
@@ -22,6 +27,8 @@ public class UserPanel extends JPanel {
         userFlightOptionsPanel = new UserFlightOptionsPanel();
         userFlightOptionsPanel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
         userFlightOptionsPanel.activatePanel(this);
+
+        commandInvoker = new CommandInvoker();
 
         userFlightFinalizationPanel = new UserFlightFinalizationPanel();
         userFlightFinalizationPanel.setBorder(BorderFactory.createLineBorder(Color.RED));
@@ -38,9 +45,13 @@ public class UserPanel extends JPanel {
         userFlightOptionsPanel.setComboBoxListener(new ComboBoxListener() {
 
             @Override
-            public void comboBoxPressed() {
-                System.out.println("pressed combobox");
-                flightListPanel.sortFlightsByDateAndTime();
+            public void comboBoxPressed(String selection) {
+                switch (selection){
+                    case "Najnovije gore" :
+                        System.out.println("Sortirano s najnovijm na vrhu");
+                        SortByEarliestCommand sortByEarliestCommand = new SortByEarliestCommand(flightListPanel);
+                        commandInvoker.runCommand(sortByEarliestCommand);
+                }
             }
         });
     }
@@ -77,9 +88,5 @@ public class UserPanel extends JPanel {
 
     public boolean isAClassSelected(){
         return userFlightOptionsPanel.getIsAClassSelected();
-    }
-
-    public JComboBox getJcomboBox(){
-        return userFlightOptionsPanel.getComboBox();
     }
 }

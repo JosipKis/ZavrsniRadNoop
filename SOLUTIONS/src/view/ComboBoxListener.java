@@ -4,5 +4,5 @@ import java.util.EventListener;
 
 public interface ComboBoxListener extends EventListener {
 
-    void comboBoxPressed();
+    void comboBoxPressed(String selection);
 }
