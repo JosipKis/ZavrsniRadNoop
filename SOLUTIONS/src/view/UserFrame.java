@@ -3,7 +3,6 @@ package view;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import controller.Kontroler;
-import view.icons.UserPanelListener;
 
 import javax.swing.*;
 import java.awt.*;

@@ -37,7 +37,7 @@ public class Print2PDF {
 
             document.open();
 
-            Image img = Image.getInstance("SOLUTIONS/src/view/icon/airplane.png");
+            Image img = Image.getInstance("SOLUTIONS/src/view/icons/airplane.png");
             img.scaleToFit(100, 100);
             img.setAlignment(Element.ALIGN_CENTER);
             img.setSpacingBefore(20f);

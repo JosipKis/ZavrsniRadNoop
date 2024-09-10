@@ -1,4 +1,4 @@
-package view.icons;
+package view;
 
 import java.util.EventListener;
 
