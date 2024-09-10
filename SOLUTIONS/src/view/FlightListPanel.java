@@ -123,7 +123,13 @@ public class FlightListPanel extends JPanel {
                         flightSelection.append(value).append(", ");
                     }
 
-                    userPanel.setText(flightSelection.toString());
+                    if (userPanel != null) {
+                        userPanel.setText(flightSelection.toString());
+                        planeClasses = kontroler.getPlaneClasses(target.getValueAt(row, 0).toString());
+                        System.out.println(target.getValueAt(row, 0));
+                        userPanel.disableOptions();
+                        userPanel.enableSelection(planeClasses.get(0), planeClasses.get(1), planeClasses.get(2));
+                    }
                     System.out.println(flightSelection);
                 }
             }
