@@ -8,10 +8,14 @@ public class UserPanel extends JPanel {
     private UserFlightOptionsPanel userFlightOptionsPanel;
     private UserFlightFinalizationPanel userFlightFinalizationPanel;
 
-    public UserPanel() {
+    private FlightListPanel flightListPanel;
+
+    public UserPanel(FlightListPanel flightListPanel) {
         super();
+        this.flightListPanel = flightListPanel;
         initComps();
         layoutComps();
+        activatePanel();
     }
 
     private void initComps() {
@@ -28,6 +32,17 @@ public class UserPanel extends JPanel {
 
         add(userFlightOptionsPanel);
         add(userFlightFinalizationPanel);
+    }
+
+    private void activatePanel(){
+        userFlightOptionsPanel.setComboBoxListener(new ComboBoxListener() {
+
+            @Override
+            public void comboBoxPressed() {
+                System.out.println("pressed combobox");
+                flightListPanel.sortFlightsByDateAndTime();
+            }
+        });
     }
 
     public void setBookingListener(BookingListener bookingListener){
@@ -62,5 +77,9 @@ public class UserPanel extends JPanel {
 
     public boolean isAClassSelected(){
         return userFlightOptionsPanel.getIsAClassSelected();
+    }
+
+    public JComboBox getJcomboBox(){
+        return userFlightOptionsPanel.getComboBox();
     }
 }

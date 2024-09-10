@@ -4,12 +4,15 @@ import controller.Kontroler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class UserFlightOptionsPanel extends JPanel {
+public class UserFlightOptionsPanel extends JPanel implements ActionListener {
 
     private JComboBox<String> flightsComboBox;
+    private String[] comboBoxContents;
     private JCheckBox handLuggage;
     private JCheckBox checkedLuggage;
 
@@ -23,6 +26,8 @@ public class UserFlightOptionsPanel extends JPanel {
     private boolean isBusinessClassPriceApplied = false;
     private boolean isEconomyClassPriceApplied = false;
 
+    private ComboBoxListener comboBoxListener;
+
     public UserFlightOptionsPanel(){
         super();
         initComps();
@@ -30,7 +35,8 @@ public class UserFlightOptionsPanel extends JPanel {
     }
 
     private void initComps() {
-        flightsComboBox = new JComboBox<>();
+        comboBoxContents = new String[]{"Odaberite...", "Najnovije gore"};
+        flightsComboBox = new JComboBox<>(comboBoxContents);
         flightsComboBox.setPreferredSize(new Dimension(100, 30));
 
         handLuggage = new JCheckBox("Hand Luggage");
@@ -86,6 +92,7 @@ public class UserFlightOptionsPanel extends JPanel {
     }
 
     public void activatePanel(UserPanel userPanel) {
+        flightsComboBox.addActionListener(this);
         firstClass.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -236,5 +243,20 @@ public class UserFlightOptionsPanel extends JPanel {
 
     public void setTotalMoneyToPay(int totalMoneyToPay) {
         this.totalMoneyToPay = totalMoneyToPay;
+    }
+
+    public JComboBox getComboBox(){
+        return flightsComboBox;
+    }
+
+    public void setComboBoxListener(ComboBoxListener comboBoxListener){
+        this.comboBoxListener = comboBoxListener;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (comboBoxListener != null){
+            comboBoxListener.comboBoxPressed();
+        }
     }
 }

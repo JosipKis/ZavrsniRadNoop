@@ -1,2 +1,6 @@
-package controller.command;public interface TableOfFlights {
+package controller.command;
+
+public interface TableOfFlights {
+
+
 }

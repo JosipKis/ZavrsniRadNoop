@@ -1,2 +1,8 @@
-package view;public interface ComboBoxListener {
+package view;
+
+import java.util.EventListener;
+
+public interface ComboBoxListener extends EventListener {
+
+    void comboBoxPressed();
 }

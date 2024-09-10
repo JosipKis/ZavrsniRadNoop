@@ -3,6 +3,7 @@ package view;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import controller.Kontroler;
+import controller.command.SortByEarliestCommand;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,14 +48,14 @@ public class UserFrame extends JFrame implements ActionListener {
         kontroler = new Kontroler();
         kontroler.connectToDatabase();
 
-        userPanel = new UserPanel();
-        userPanel.setPreferredSize(new Dimension(690, 210));
-        userPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
         flightListPanel = new FlightListPanel();
         flightListPanel.setPreferredSize(new Dimension(300, 250));
 
         flightListPanel.activateTable(flightListPanel.getDaTable(), userPanel);
+
+        userPanel = new UserPanel(flightListPanel);
+        userPanel.setPreferredSize(new Dimension(690, 210));
+        userPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         menuBar = new JMenuBar();
         menuBar.setBorder(BorderFactory.createLineBorder(Color.BLACK));

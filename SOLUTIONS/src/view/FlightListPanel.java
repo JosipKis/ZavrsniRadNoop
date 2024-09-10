@@ -1,6 +1,7 @@
 package view;
 
 import controller.Kontroler;
+import controller.command.TableOfFlights;
 import model.DataBase;
 import model.Flight;
 
@@ -9,10 +10,11 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
-public class FlightListPanel extends JPanel {
+public class FlightListPanel extends JPanel implements TableOfFlights {
 
     private JTable table;
     private AbstractTableModel abstractTableModel;
@@ -150,5 +152,44 @@ public class FlightListPanel extends JPanel {
 
     public List<Integer> getPlaneClasses(){
         return planeClasses;
+    }
+
+    public void sortFlightsByDateAndTime() {
+        System.out.println("Comparing....");
+        // Create a comparator for sorting
+        Comparator<Flight> flightComparator = new Comparator<Flight>() {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+
+            @Override
+            public int compare(Flight f1, Flight f2) {
+                // Compare dates first
+                try {
+                    Date date1 = dateFormat.parse(f1.getDepartureDate());
+                    Date date2 = dateFormat.parse(f2.getDepartureDate());
+
+                    int dateComparison = date1.compareTo(date2);
+                    if (dateComparison != 0) {
+                        return dateComparison;
+                    }
+
+                    // If dates are the same, compare times
+                    Date time1 = timeFormat.parse(f1.getDepartureTime());
+                    Date time2 = timeFormat.parse(f2.getDepartureTime());
+                    return time1.compareTo(time2);
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return 0;
+            }
+        };
+
+        flights.sort(flightComparator);
+        abstractTableModel.fireTableDataChanged();
+    }
+
+    public void resetTable(){
+
     }
 }
