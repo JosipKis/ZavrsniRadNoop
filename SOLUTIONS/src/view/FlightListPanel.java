@@ -14,7 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class FlightListPanel extends JPanel implements TableOfFlights {
+public class FlightListPanel extends JPanel {
 
     private JTable table;
     private AbstractTableModel abstractTableModel;
@@ -62,12 +62,12 @@ public class FlightListPanel extends JPanel implements TableOfFlights {
     }
 
     private void layoutComps() {
-        add(new JScrollPane(table));
+        add(scrollPane);
     }
 
     private AbstractTableModel initTable() {
 
-         AbstractTableModel abstractTableModel = new AbstractTableModel() {
+          abstractTableModel = new AbstractTableModel() {
             @Override
             public int getRowCount() {
                 return flights.size();
@@ -114,36 +114,20 @@ public class FlightListPanel extends JPanel implements TableOfFlights {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    JTable target = (JTable) e.getSource();
+                    JTable target = (JTable)e.getSource();
                     int row = target.getSelectedRow();
+                    StringBuilder flightSelection = new StringBuilder();
 
-                    Flight selectedFlight = flights.get(row);
-                    flightSelection = new StringBuilder();
-                    flightDetails = new ArrayList<>();
-                    planeClasses = new ArrayList<>();
-
-                    flightSelection.append(selectedFlight.getPlane()).append("\n")
-                            .append(selectedFlight.getDeparture()).append("\n")
-                            .append(selectedFlight.getDestination()).append("\n")
-                            .append(selectedFlight.getDepartureDate()).append("\n")
-                            .append(selectedFlight.getDepartureTime()).append("\n");
-
-                    flightDetails.add(selectedFlight.getPlane());
-                    flightDetails.add(selectedFlight.getDeparture());
-                    flightDetails.add(selectedFlight.getDestination());
-                    flightDetails.add(selectedFlight.getDepartureDate());
-                    flightDetails.add(selectedFlight.getDepartureTime());
-
-                    if (userPanel != null) {
-                        userPanel.setText(flightSelection.toString());
-                        planeClasses = kontroler.getPlaneClasses(selectedFlight.getFlightNumber());
-                        userPanel.disableOptions();
-                        userPanel.enableSelection(planeClasses.get(0), planeClasses.get(1), planeClasses.get(2));
+                    for (int column = 0; column < target.getColumnCount(); column++) {
+                        Object value = target.getValueAt(row, column);
+                        flightSelection.append(value).append(", ");
                     }
+
+                    userPanel.setText(flightSelection.toString());
+                    System.out.println(flightSelection);
                 }
             }
         });
-
     }
 
     public StringBuilder getFlightSelection(){

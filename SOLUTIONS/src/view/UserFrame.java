@@ -51,11 +51,11 @@ public class UserFrame extends JFrame implements ActionListener {
         flightListPanel = new FlightListPanel();
         flightListPanel.setPreferredSize(new Dimension(300, 250));
 
-        flightListPanel.activateTable(flightListPanel.getDaTable(), userPanel);
-
         userPanel = new UserPanel(flightListPanel);
         userPanel.setPreferredSize(new Dimension(690, 210));
         userPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        flightListPanel.activateTable(flightListPanel.getDaTable(), userPanel);
 
         menuBar = new JMenuBar();
         menuBar.setBorder(BorderFactory.createLineBorder(Color.BLACK));

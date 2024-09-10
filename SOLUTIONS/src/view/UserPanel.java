@@ -51,6 +51,8 @@ public class UserPanel extends JPanel {
                         System.out.println("Sortirano s najnovijm na vrhu");
                         SortByEarliestCommand sortByEarliestCommand = new SortByEarliestCommand(flightListPanel);
                         commandInvoker.runCommand(sortByEarliestCommand);
+                        userFlightOptionsPanel.activatePanel(UserPanel.this);
+                        break;
                 }
             }
         });
