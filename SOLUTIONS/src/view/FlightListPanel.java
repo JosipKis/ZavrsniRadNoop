@@ -49,6 +49,7 @@ public class FlightListPanel extends JPanel {
 
         flights = kontroler.getAllFlights();
         backupFlights = new ArrayList<>(flights);
+        flightDetails = new ArrayList<>();
 
         table = new JTable();
         columnHeaders = new String[]{"Plane", "Departure", "Destination", "Departure date", "Departure time"};
@@ -127,6 +128,7 @@ public class FlightListPanel extends JPanel {
                         for (int column = 0; column < target.getColumnCount(); column++) {
                             Object value = target.getValueAt(row, column);
                             flightSelection.append(value).append(", ");
+                            flightDetails.add(value.toString());
                         }
 
                         if (userPanel != null) {

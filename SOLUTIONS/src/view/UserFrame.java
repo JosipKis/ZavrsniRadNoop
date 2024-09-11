@@ -104,7 +104,8 @@ public class UserFrame extends JFrame implements ActionListener {
             @Override
             public void bookButtonClicked(String button) {
                 List<String> lista = flightListPanel.getDetailsOfFlight();
-                if (lista != null && userPanel.isAClassSelected()){
+                System.out.println(lista);
+                if (lista != null  && userPanel.isAClassSelected()){
                     lista.add(userPanel.getTotalPriceText());
                     kontroler.addTicketToDb(lista);
                     dispose();
