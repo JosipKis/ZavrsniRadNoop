@@ -35,7 +35,7 @@ public class UserFlightOptionsPanel extends JPanel implements ActionListener {
     }
 
     private void initComps() {
-        comboBoxContents = new String[]{"Odaberite...", "Najstarije gore", "Najnovije gore", "Prva klasa"};
+        comboBoxContents = new String[]{"Odaberite...", "Najstarije gore", "Najnovije gore", "Prva klasa", "Poslovna klasa", "Ekonomična klasa"};
         flightsComboBox = new JComboBox<>(comboBoxContents);
         flightsComboBox.setPreferredSize(new Dimension(100, 30));
         flightsComboBox.addActionListener(this);

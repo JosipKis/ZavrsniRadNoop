@@ -2,17 +2,17 @@ package controller.command;
 
 import view.FlightListPanel;
 
-public class IsFirstClassCommand implements Command{
+public class IsBussinesClassCommand implements Command {
 
     private FlightListPanel flightListPanel;
 
-    public IsFirstClassCommand(FlightListPanel flightListPanel) {
+    public IsBussinesClassCommand(FlightListPanel flightListPanel) {
         this.flightListPanel = flightListPanel;
     }
 
     @Override
     public void execute() {
-        flightListPanel.isRequiredSeatClass(0);
+        flightListPanel.isRequiredSeatClass(1);
     }
 
     @Override

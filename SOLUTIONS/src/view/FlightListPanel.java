@@ -202,7 +202,7 @@ public class FlightListPanel extends JPanel {
         table.repaint();
     }
 
-    public void isFirstClassFlight() {
+    public void isRequiredSeatClass(int requiredSeatClass) {
         flights = new ArrayList<>(backupFlights);
         Iterator<Flight> iterator = flights.iterator();
 
@@ -210,7 +210,7 @@ public class FlightListPanel extends JPanel {
             Flight flight = iterator.next();
             planeClasses = kontroler.getPlaneClasses(kontroler.getPlaneNameByID(flight.getPlane()));
 
-            if (planeClasses.get(0).equals(0)) {
+            if (planeClasses.get(requiredSeatClass).equals(0)) {
                 iterator.remove();
             } else {
                 System.out.println(kontroler.getPlaneNameByID(flight.getPlane()) + " ima prvu klasu");

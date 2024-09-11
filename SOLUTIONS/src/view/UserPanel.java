@@ -61,6 +61,16 @@ public class UserPanel extends JPanel {
                         Command isFirstClass = new IsFirstClassCommand(flightListPanel);
                         commandInvoker.runCommand(isFirstClass);
                         break;
+                    case "Poslovna klasa" :
+                        System.out.println("Poslovna klasa");
+                        Command isBussinessClass = new IsBussinesClassCommand(flightListPanel);
+                        commandInvoker.runCommand(isBussinessClass);
+                        break;
+                    case "Ekonomična klasa" :
+                        System.out.println("Ekonomicna klasa");
+                        Command isEconomyClass = new IsEconomyClassCommand(flightListPanel);
+                        commandInvoker.runCommand(isEconomyClass);
+                        break;
                 }
             }
         });
