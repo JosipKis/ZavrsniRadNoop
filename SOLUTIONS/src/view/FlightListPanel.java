@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.List;
 
 public class FlightListPanel extends JPanel {
 
@@ -26,6 +27,7 @@ public class FlightListPanel extends JPanel {
     private String planeID;
     private List<Integer> planeClasses;
     private List<Flight> flights;
+    private List<Flight> backupFlights;
     private StringBuilder flightSelection;
     private List<String> flightDetails;
 
@@ -46,6 +48,7 @@ public class FlightListPanel extends JPanel {
         }
 
         flights = kontroler.getAllFlights();
+        backupFlights = new ArrayList<>(flights);
 
         table = new JTable();
         columnHeaders = new String[]{"Plane", "Departure", "Destination", "Departure date", "Departure time"};
@@ -80,6 +83,7 @@ public class FlightListPanel extends JPanel {
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
                 Flight flight = flights.get(rowIndex);
+
                 switch(columnIndex){
                     case 0:
                         planeID = kontroler.getPlaneNameByID(flight.getPlane());
@@ -115,21 +119,27 @@ public class FlightListPanel extends JPanel {
                 if (e.getClickCount() == 2) {
                     JTable target = (JTable)e.getSource();
                     int row = target.getSelectedRow();
-                    StringBuilder flightSelection = new StringBuilder();
+                    Flight selectedFlight = flights.get(row);
 
-                    for (int column = 0; column < target.getColumnCount(); column++) {
-                        Object value = target.getValueAt(row, column);
-                        flightSelection.append(value).append(", ");
-                    }
+                    if (selectedFlight.isActive()) {
+                        StringBuilder flightSelection = new StringBuilder();
 
-                    if (userPanel != null) {
-                        userPanel.setText(flightSelection.toString());
-                        planeClasses = kontroler.getPlaneClasses(target.getValueAt(row, 0).toString());
-                        System.out.println(target.getValueAt(row, 0));
-                        userPanel.disableOptions();
-                        userPanel.enableSelection(planeClasses.get(0), planeClasses.get(1), planeClasses.get(2));
+                        for (int column = 0; column < target.getColumnCount(); column++) {
+                            Object value = target.getValueAt(row, column);
+                            flightSelection.append(value).append(", ");
+                        }
+
+                        if (userPanel != null) {
+                            userPanel.setText(flightSelection.toString());
+                            planeClasses = kontroler.getPlaneClasses(target.getValueAt(row, 0).toString());
+                            System.out.println(target.getValueAt(row, 0));
+                            userPanel.disableOptions();
+                            userPanel.enableSelection(planeClasses.get(0), planeClasses.get(1), planeClasses.get(2));
+                        }
+                        System.out.println(flightSelection);
+                    }else {
+                        System.out.println("Flight not flying");
                     }
-                    System.out.println(flightSelection);
                 }
             }
         });
@@ -152,6 +162,7 @@ public class FlightListPanel extends JPanel {
     }
 
     public void sortFlightsByDateAndTimeEarliest() {
+        flights = new ArrayList<>(backupFlights);
         Comparator<Flight> flightComparator = new Comparator<Flight>() {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
@@ -183,11 +194,27 @@ public class FlightListPanel extends JPanel {
     }
 
     public void sortByDateAndTimeLatest(){
-        System.out.println("Before reverse: " + flights);
         sortFlightsByDateAndTimeEarliest();
         Collections.reverse(flights);
-        System.out.println("After reverse: " + flights);
         abstractTableModel.fireTableDataChanged();
         table.repaint();
     }
+
+    public void isFirstClassFlight() {
+        flights = new ArrayList<>(backupFlights);
+        Iterator<Flight> iterator = flights.iterator();
+
+        while (iterator.hasNext()) {
+            Flight flight = iterator.next();
+            planeClasses = kontroler.getPlaneClasses(kontroler.getPlaneNameByID(flight.getPlane()));
+
+            if (planeClasses.get(0).equals(0)) {
+                iterator.remove();
+            } else {
+                System.out.println(kontroler.getPlaneNameByID(flight.getPlane()) + " ima prvu klasu");
+            }
+        }
+        abstractTableModel.fireTableDataChanged();
+    }
+
 }

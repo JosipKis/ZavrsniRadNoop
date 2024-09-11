@@ -1,9 +1,6 @@
 package view;
 
-import controller.command.Command;
-import controller.command.CommandInvoker;
-import controller.command.SortByEarliestCommand;
-import controller.command.SortByLatestCommand;
+import controller.command.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,13 +50,16 @@ public class UserPanel extends JPanel {
                         System.out.println("Sortirano s najstarijim na vrhu");
                         Command sortByEarliestCommand = new SortByEarliestCommand(flightListPanel);
                         commandInvoker.runCommand(sortByEarliestCommand);
-
                         break;
                     case "Najnovije gore" :
                         System.out.println("Sortirano s najnovijim na vrhu");
                         Command sortByLatestCommand = new SortByLatestCommand(flightListPanel);
                         commandInvoker.runCommand(sortByLatestCommand);
-
+                        break;
+                    case "Prva klasa" :
+                        System.out.println("Odabran prikaz letova s prvom klasom");
+                        Command isFirstClass = new IsFirstClassCommand(flightListPanel);
+                        commandInvoker.runCommand(isFirstClass);
                         break;
                 }
             }

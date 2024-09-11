@@ -9,6 +9,9 @@ public class Flight {
     private int planeID;
     private String departureTime;
 
+    /* Provjera za is first/bussines/economy commands */
+    private boolean isActive = true;
+
     public int getFlightNumber() { return flightNumber; }
 
     public String getDeparture() { return departure; }
@@ -32,6 +35,14 @@ public class Flight {
     public void setPlane(int planeID) { this.planeID = planeID; }
 
     public void setDepartureTime(String departureTime) { this.departureTime = departureTime; }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 
     @Override
     public String toString() {
