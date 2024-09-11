@@ -219,4 +219,12 @@ public class FlightListPanel extends JPanel {
         abstractTableModel.fireTableDataChanged();
     }
 
+    public List<Flight> getCurrentFlightsState(){
+        return flights;
+    }
+
+    public void undoFlightListChange(List<Flight> flights) {
+        this.flights = flights;
+        abstractTableModel.fireTableDataChanged();
+    }
 }
