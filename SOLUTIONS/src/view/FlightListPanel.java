@@ -1,7 +1,6 @@
 package view;
 
 import controller.Kontroler;
-import controller.command.TableOfFlights;
 import model.DataBase;
 import model.Flight;
 
@@ -83,8 +82,8 @@ public class FlightListPanel extends JPanel {
                 Flight flight = flights.get(rowIndex);
                 switch(columnIndex){
                     case 0:
-                        planeID = kontroler.getPlaneNameByID(flight.getFlightNumber());
-                        return kontroler.getPlaneNameByID(flight.getFlightNumber());
+                        planeID = kontroler.getPlaneNameByID(flight.getPlane());
+                        return kontroler.getPlaneNameByID(flight.getPlane());
                     case 1:
                         return flight.getDeparture();
                     case 2:
@@ -152,7 +151,7 @@ public class FlightListPanel extends JPanel {
         return planeClasses;
     }
 
-    public void sortFlightsByDateAndTime() {
+    public void sortFlightsByDateAndTimeEarliest() {
         Comparator<Flight> flightComparator = new Comparator<Flight>() {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
@@ -181,5 +180,14 @@ public class FlightListPanel extends JPanel {
 
         flights.sort(flightComparator);
         abstractTableModel.fireTableDataChanged();
+    }
+
+    public void sortByDateAndTimeLatest(){
+        System.out.println("Before reverse: " + flights);
+        sortFlightsByDateAndTimeEarliest();
+        Collections.reverse(flights);
+        System.out.println("After reverse: " + flights);
+        abstractTableModel.fireTableDataChanged();
+        table.repaint();
     }
 }

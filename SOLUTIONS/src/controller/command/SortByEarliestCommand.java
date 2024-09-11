@@ -12,7 +12,7 @@ public class SortByEarliestCommand implements Command {
 
     @Override
     public void execute() {
-        tableOfFlights.sortFlightsByDateAndTime();
+        tableOfFlights.sortFlightsByDateAndTimeEarliest();
     }
 
     @Override

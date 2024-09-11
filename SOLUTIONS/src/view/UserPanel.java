@@ -1,7 +1,9 @@
 package view;
 
+import controller.command.Command;
 import controller.command.CommandInvoker;
 import controller.command.SortByEarliestCommand;
+import controller.command.SortByLatestCommand;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,11 +49,17 @@ public class UserPanel extends JPanel {
             @Override
             public void comboBoxPressed(String selection) {
                 switch (selection){
-                    case "Najnovije gore" :
-                        System.out.println("Sortirano s najnovijm na vrhu");
-                        SortByEarliestCommand sortByEarliestCommand = new SortByEarliestCommand(flightListPanel);
+                    case "Najstarije gore" :
+                        System.out.println("Sortirano s najstarijim na vrhu");
+                        Command sortByEarliestCommand = new SortByEarliestCommand(flightListPanel);
                         commandInvoker.runCommand(sortByEarliestCommand);
-                        userFlightOptionsPanel.activatePanel(UserPanel.this);
+
+                        break;
+                    case "Najnovije gore" :
+                        System.out.println("Sortirano s najnovijim na vrhu");
+                        Command sortByLatestCommand = new SortByLatestCommand(flightListPanel);
+                        commandInvoker.runCommand(sortByLatestCommand);
+
                         break;
                 }
             }
