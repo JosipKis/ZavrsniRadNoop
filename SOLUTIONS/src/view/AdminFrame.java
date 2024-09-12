@@ -5,6 +5,8 @@ import java.net.URL;
 
 public class AdminFrame extends JFrame {
 
+    private AdminPanel adminPanel;
+
     public AdminFrame() {
         super("Admin Frame");
         setSize(500, 500);
@@ -22,11 +24,11 @@ public class AdminFrame extends JFrame {
     }
 
     private void initComps() {
-
+        adminPanel = new AdminPanel();
     }
 
     private void layoutComps() {
-
+        add(adminPanel);
     }
 
     private void activateFrame() {
