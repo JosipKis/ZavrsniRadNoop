@@ -1,6 +1,5 @@
 package view;
 
-import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 import controller.Kontroler;
 import model.Flight;
@@ -59,6 +58,7 @@ public class CreateFlightPanel extends JPanel {
         Calendar c = Calendar.getInstance();
         c.add(Calendar.YEAR, 0);
         dateChooser = new JDateChooser(c.getTime());
+        dateChooser.setDateFormatString("yyyy-MM-dd");
         dateChooser.setPreferredSize(new Dimension(departureField.getPreferredSize().width, departureField.getPreferredSize().height));
 
         createFlightButton = new JButton("Dodaj let");
