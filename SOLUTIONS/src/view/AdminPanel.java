@@ -16,11 +16,12 @@ public class AdminPanel extends JPanel {
 
     private void initComps() {
         createPlanePanel = new CreatePlanePanel();
-        createPlanePanel.setPreferredSize(new Dimension(290, 300));
+        createPlanePanel.setPreferredSize(new Dimension(300, 300));
         createPlanePanel.setBorder(BorderFactory.createTitledBorder("Dodavanje aviona"));
 
         createFlightPanel = new CreateFlightPanel();
-        createFlightPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+        createFlightPanel.setPreferredSize(new Dimension(300, 300));
+        createFlightPanel.setBorder(BorderFactory.createTitledBorder("Dodavanje leta"));
     }
 
     private void layoutComps() {

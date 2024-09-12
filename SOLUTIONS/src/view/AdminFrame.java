@@ -9,7 +9,7 @@ public class AdminFrame extends JFrame {
 
     public AdminFrame() {
         super("Admin Frame");
-        setSize(600, 350);
+        setSize(630, 350);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
