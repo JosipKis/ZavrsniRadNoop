@@ -1,10 +1,13 @@
 package controller;
 
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import model.DataBase;
 import model.Flight;
 import model.Ticket;
 import model.User;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -268,6 +271,27 @@ public class Kontroler {
                 ps.executeUpdate();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public static void determineUsersTheme(String userTheme, JRadioButtonMenuItem lightThemeRB, JRadioButtonMenuItem darkThemeRB) {
+
+        if (userTheme.equals("light")) {
+            lightThemeRB.setSelected(true);
+            System.out.println("Light theme");
+            try {
+                UIManager.setLookAndFeel(new FlatMacLightLaf());
+            } catch (Exception ex) {
+                System.err.println("Failed to initialize LaF");
+            }
+        } else if (userTheme.equals("dark")) {
+            System.out.println("Dark theme");
+            darkThemeRB.setSelected(true);
+            try {
+                UIManager.setLookAndFeel(new FlatMacDarkLaf());
+            } catch (Exception ex) {
+                System.err.println("Failed to initialize LaF");
             }
         }
     }

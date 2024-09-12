@@ -1,5 +1,6 @@
 package view;
 
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import controller.Kontroler;
 
 import javax.swing.*;
@@ -29,6 +30,12 @@ public class LoginFrame extends JFrame {
     }
 
     private void initComps() {
+        try {
+            UIManager.setLookAndFeel( new FlatMacLightLaf());
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
+        }
+
         kontroler = new Kontroler();
         try {
             kontroler.connectToDatabase();

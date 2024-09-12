@@ -96,7 +96,7 @@ public class UserFrame extends JFrame implements ActionListener {
         buttonGroup = new ButtonGroup();
         buttonGroup.add(lightThemeRB);
         buttonGroup.add(darkThemeRB);
-        determineUsersTheme();
+        Kontroler.determineUsersTheme(kontroler.getUsersTheme(Kontroler.getCurrentUserID()), lightThemeRB, darkThemeRB);
 
         menuBar.add(jMenu);
         jMenu.add(mojProfil);
@@ -186,13 +186,19 @@ public class UserFrame extends JFrame implements ActionListener {
             case "lightTheme":
                 System.out.println("Light theme selected");
                 kontroler.setUsersThemeInDB("light", Kontroler.getCurrentUserID());
-                determineUsersTheme();
+                Kontroler.determineUsersTheme(kontroler.getUsersTheme(Kontroler.getCurrentUserID()), lightThemeRB, darkThemeRB);
+                SwingUtilities.updateComponentTreeUI(this);
+                revalidate();
+                repaint();
                 break;
 
             case "darkTheme":
                 System.out.println("Dark theme selected");
                 kontroler.setUsersThemeInDB("dark", Kontroler.getCurrentUserID());
-                determineUsersTheme();
+                Kontroler.determineUsersTheme(kontroler.getUsersTheme(Kontroler.getCurrentUserID()), lightThemeRB, darkThemeRB);
+                SwingUtilities.updateComponentTreeUI(this);
+                revalidate();
+                repaint();
                 break;
 
             case "mojProfil":
@@ -212,27 +218,4 @@ public class UserFrame extends JFrame implements ActionListener {
         }
     }
 
-    private void determineUsersTheme() {
-        String userTheme = kontroler.getUsersTheme(Kontroler.getCurrentUserID());
-
-        if (userTheme.equals("light")) {
-            lightThemeRB.setSelected(true);
-            try {
-                UIManager.setLookAndFeel(new FlatMacLightLaf());
-            } catch (Exception ex) {
-                System.err.println("Failed to initialize LaF");
-            }
-        } else if (userTheme.equals("dark")) {
-            darkThemeRB.setSelected(true);
-            try {
-                UIManager.setLookAndFeel(new FlatMacDarkLaf());
-            } catch (Exception ex) {
-                System.err.println("Failed to initialize LaF");
-            }
-        }
-
-        SwingUtilities.updateComponentTreeUI(this);
-        revalidate();
-        repaint();
-    }
 }
