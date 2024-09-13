@@ -296,6 +296,27 @@ public class Kontroler {
         }
     }
 
+    public void addPlaneToDB(List<String> planeDetails){
+        if (con != null) {
+            try {
+                String query = "INSERT INTO Plane (name, manufacturer, firstClass, businessClass, economyClass) VALUES (?, ?, ?, ?, ?);";
+
+                PreparedStatement ps = con.prepareStatement(query);
+
+                ps.setString(1, planeDetails.get(0));
+                ps.setString(2, planeDetails.get(1));
+                ps.setString(3, planeDetails.get(2));
+                ps.setString(4, planeDetails.get(3));
+                ps.setString(5, planeDetails.get(4));
+
+                ps.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     public static String getCurrentUser() {
         return currentUser.getUsername();
     }

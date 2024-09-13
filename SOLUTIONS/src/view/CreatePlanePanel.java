@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class CreatePlanePanel extends JPanel implements ActionListener {
 
@@ -21,6 +24,8 @@ public class CreatePlanePanel extends JPanel implements ActionListener {
     private boolean economyClassSelected;
 
     private JButton createPlaneBtn;
+
+    private List<String> newPlaneSpecs;
 
     private PlaneCreationListener planeCreationListener;
 
@@ -57,6 +62,8 @@ public class CreatePlanePanel extends JPanel implements ActionListener {
 
         createPlaneBtn = new JButton("Dodaj Avion");
         createPlaneBtn.setActionCommand("createPlane");
+
+        newPlaneSpecs = new ArrayList<>();
     }
 
     private void layoutComps() {
@@ -141,6 +148,11 @@ public class CreatePlanePanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (planeCreationListener != null){
             if (e.getActionCommand().equals("createPlane")){
+                newPlaneSpecs.clear();
+                newPlaneSpecs.add(planeName.getText());
+                newPlaneSpecs.add(planeManufacturer.getText());
+                checkForInteger(firstClassPrice.getText(), businessClassPrice.getText(), economyClassPrice.getText());
+
                 planeCreationListener.createBtnPressed();
             } else {
                 planeCreationListener.checkBoxSelected(e.getActionCommand());
@@ -185,5 +197,36 @@ public class CreatePlanePanel extends JPanel implements ActionListener {
                 }
                 break;
         }
+    }
+
+    private void checkForInteger(String value1, String value2, String value3){
+        try {
+            if (!Objects.equals(value1, "")){
+                Integer.parseInt(value1);
+            }else {
+                value1 = "0";
+            }
+            if (!Objects.equals(value2, "")){
+                Integer.parseInt(value2);
+            }else {
+                value2 = "0";
+            }
+            if (!Objects.equals(value3, "")){
+                Integer.parseInt(value3);
+            }else {
+                value3 = "0";
+            }
+
+            newPlaneSpecs.add(value1);
+            newPlaneSpecs.add(value2);
+            newPlaneSpecs.add(value3);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Unesena cijena razreda mora sadržavati samo brojčane znamenke!", "Nepravilna cijena", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    public List<String> getNewPlaneSpecs() {
+        return newPlaneSpecs;
     }
 }

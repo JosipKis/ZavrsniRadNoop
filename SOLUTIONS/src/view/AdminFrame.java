@@ -1,7 +1,5 @@
 package view;
 
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import controller.Kontroler;
 
 import javax.swing.*;
@@ -96,7 +94,29 @@ public class AdminFrame extends JFrame implements ActionListener {
     }
 
     private void activateFrame() {
+        adminPanel.setPlaneCreationListener(new PlaneCreationListener() {
+            @Override
+            public void createBtnPressed() {
+                System.out.println("Create button pressed");
+                System.out.println(adminPanel.getNewPlaneSpecs());
+                kontroler.addPlaneToDB(adminPanel.getNewPlaneSpecs());
+            }
 
+            @Override
+            public void checkBoxSelected(String actionCommand) {
+                switch (actionCommand) {
+                    case "fst":
+                        System.out.println("First class selected");
+                        break;
+                    case "bsn":
+                        System.out.println("Business class selected");
+                        break;
+                    case "eco":
+                        System.out.println("Economy class selected");
+                        break;
+                }
+            }
+        });
     }
 
     @Override
@@ -133,7 +153,4 @@ public class AdminFrame extends JFrame implements ActionListener {
                 break;
         }
     }
-
-    // Ponavljajući kod, rectify this!!!
-
 }

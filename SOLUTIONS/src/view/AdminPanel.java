@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class AdminPanel extends JPanel {
 
@@ -32,26 +33,14 @@ public class AdminPanel extends JPanel {
     }
 
     private void activatePanel() {
-        createPlanePanel.setPlaneCreationListener(new PlaneCreationListener() {
-            @Override
-            public void createBtnPressed() {
-                System.out.println("Create button pressed");
-            }
 
-            @Override
-            public void checkBoxSelected(String actionCommand) {
-                switch (actionCommand) {
-                    case "fst":
-                        System.out.println("First class selected");
-                        break;
-                    case "bsn":
-                        System.out.println("Business class selected");
-                        break;
-                    case "eco":
-                        System.out.println("Economy class selected");
-                        break;
-                }
-            }
-        });
+    }
+
+    public void setPlaneCreationListener(PlaneCreationListener listener) {
+        createPlanePanel.setPlaneCreationListener(listener);
+    }
+
+    public List<String> getNewPlaneSpecs(){
+        return createPlanePanel.getNewPlaneSpecs();
     }
 }
