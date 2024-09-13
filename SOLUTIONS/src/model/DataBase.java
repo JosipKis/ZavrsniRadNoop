@@ -7,12 +7,14 @@ public class DataBase {
 
     private User currentUser;
     private List<Flight> flights;
+    private List<String> unassignedPlanes;
     private String planeName;
     private List<Integer> chosenPlaneClasses;
     private List<Ticket> ticketsByUser;
 
     public DataBase() {
         flights = new ArrayList<>();
+        unassignedPlanes = new ArrayList<>();
         chosenPlaneClasses = new ArrayList<>();
         ticketsByUser = new ArrayList<>();
         planeName = "";
@@ -73,5 +75,17 @@ public class DataBase {
 
     public void addTickets4User(Ticket ticket) {
         ticketsByUser.add(ticket);
+    }
+
+    public void addToUnassignedPlanes(String planeName){
+        unassignedPlanes.add(planeName);
+    }
+
+    public void resetUnassignedPlanes(){
+        unassignedPlanes.clear();
+    }
+
+    public List<String> getUnassignedPlanes() {
+        return unassignedPlanes;
     }
 }

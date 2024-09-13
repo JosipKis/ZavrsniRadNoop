@@ -303,11 +303,15 @@ public class Kontroler {
 
                 PreparedStatement ps = con.prepareStatement(query);
 
-                ps.setString(1, planeDetails.get(0));
-                ps.setString(2, planeDetails.get(1));
-                ps.setString(3, planeDetails.get(2));
-                ps.setString(4, planeDetails.get(3));
-                ps.setString(5, planeDetails.get(4));
+                try {
+                    ps.setString(1, planeDetails.get(0));
+                    ps.setString(2, planeDetails.get(1));
+                    ps.setString(3, planeDetails.get(2));
+                    ps.setString(4, planeDetails.get(3));
+                    ps.setString(5, planeDetails.get(4));
+                } catch (IndexOutOfBoundsException ioobe) {
+                    System.out.println("Index out of bounds, no plane class prices entered!!!");
+                }
 
                 ps.executeUpdate();
 
@@ -315,6 +319,30 @@ public class Kontroler {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    public List<String> getAllUnassignedPlaneNames(){
+        if (con != null){
+            dataBase.resetUnassignedPlanes();
+
+            String query = "SELECT p.*\n" +
+                    "FROM Plane p\n" +
+                    "LEFT JOIN Flights f ON p.id = f.plane\n" +
+                    "WHERE f.plane IS NULL;\n";
+
+            try (PreparedStatement ps = con.prepareStatement(query)){
+                try (ResultSet rs = ps.executeQuery()){
+                    while (rs.next()){
+                        String planeName = rs.getString("name");
+
+                        dataBase.addToUnassignedPlanes(planeName);
+                    }
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return dataBase.getUnassignedPlanes();
     }
 
     public static String getCurrentUser() {

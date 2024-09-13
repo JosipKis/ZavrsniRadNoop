@@ -217,9 +217,14 @@ public class CreatePlanePanel extends JPanel implements ActionListener {
                 value3 = "0";
             }
 
-            newPlaneSpecs.add(value1);
-            newPlaneSpecs.add(value2);
-            newPlaneSpecs.add(value3);
+            if (value1.equals("0") && value2.equals("0") && value3.equals("0")){
+                JOptionPane.showMessageDialog(null, "Morate unijeti barem jedan razred i njegovu cijenu!", "Nezadovoljen minimalan broj razreda", JOptionPane.WARNING_MESSAGE);
+            }else {
+                newPlaneSpecs.add(value1);
+                newPlaneSpecs.add(value2);
+                newPlaneSpecs.add(value3);
+            }
+
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, "Unesena cijena razreda mora sadržavati samo brojčane znamenke!", "Nepravilna cijena", JOptionPane.ERROR_MESSAGE);
         }
@@ -228,5 +233,28 @@ public class CreatePlanePanel extends JPanel implements ActionListener {
 
     public List<String> getNewPlaneSpecs() {
         return newPlaneSpecs;
+    }
+
+    public void resetForm(){
+        planeName.setText("");
+        planeManufacturer.setText("");
+        firstClassPrice.setText("");
+        businessClassPrice.setText("");
+        economyClassPrice.setText("");
+
+        firstClassPrice.setEnabled(false);
+        hasFirstClass.setSelected(false);
+        firstClassPrice.setBorder(BorderFactory.createEtchedBorder());
+        firstClassSelected = false;
+
+        businessClassPrice.setEnabled(false);
+        hasBusinessClass.setSelected(false);
+        businessClassPrice.setBorder(BorderFactory.createEtchedBorder());
+        businessClassSelected = false;
+
+        economyClassPrice.setEnabled(false);
+        hasEconomyClass.setSelected(false);
+        economyClassPrice.setBorder(BorderFactory.createEtchedBorder());
+        economyClassSelected = false;
     }
 }

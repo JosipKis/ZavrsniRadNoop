@@ -21,7 +21,7 @@ public class CreateFlightPanel extends JPanel {
 
     private JButton createFlightButton;
 
-    private List<Flight> allFlights;
+    private List<String> allFlights;
     private String[] planeNames;
 
     private Kontroler kontroler;
@@ -35,12 +35,12 @@ public class CreateFlightPanel extends JPanel {
         kontroler = new Kontroler();
         kontroler.connectToDatabase();
 
-        allFlights = kontroler.getAllFlights();
+        allFlights = kontroler.getAllUnassignedPlaneNames();
 
         planeNames = new String[allFlights.size()];
         for (int i = 0; i < allFlights.size(); i++) {
-            planeNames[i] = kontroler.getPlaneNameByID(allFlights.get(i).getPlane());
-            System.out.println("start" + kontroler.getPlaneNameByID(allFlights.get(i).getPlane()));
+            planeNames[i] = kontroler.getAllUnassignedPlaneNames().get(i);
+            System.out.println("start" + kontroler.getAllUnassignedPlaneNames().get(i));
         }
 
         planes = new JComboBox<>(planeNames);

@@ -43,4 +43,8 @@ public class AdminPanel extends JPanel {
     public List<String> getNewPlaneSpecs(){
         return createPlanePanel.getNewPlaneSpecs();
     }
+
+    public void resetCreatePanelForm(){
+        createPlanePanel.resetForm();
+    }
 }
