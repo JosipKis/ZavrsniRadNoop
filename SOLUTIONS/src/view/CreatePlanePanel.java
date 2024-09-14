@@ -217,16 +217,14 @@ public class CreatePlanePanel extends JPanel implements ActionListener {
                 value3 = "0";
             }
 
-            if (value1.equals("0") && value2.equals("0") && value3.equals("0")){
-                JOptionPane.showMessageDialog(null, "Morate unijeti barem jedan razred i njegovu cijenu!", "Nezadovoljen minimalan broj razreda", JOptionPane.WARNING_MESSAGE);
-            }else {
-                newPlaneSpecs.add(value1);
-                newPlaneSpecs.add(value2);
-                newPlaneSpecs.add(value3);
-            }
+            newPlaneSpecs.add(value1);
+            newPlaneSpecs.add(value2);
+            newPlaneSpecs.add(value3);
 
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Unesena cijena razreda mora sadržavati samo brojčane znamenke!", "Nepravilna cijena", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e){
+            newPlaneSpecs.add(value1 = "0");
+            newPlaneSpecs.add(value2 = "0");
+            newPlaneSpecs.add(value3 = "0");
         }
 
     }

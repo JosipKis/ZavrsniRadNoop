@@ -309,14 +309,14 @@ public class Kontroler {
                     ps.setString(3, planeDetails.get(2));
                     ps.setString(4, planeDetails.get(3));
                     ps.setString(5, planeDetails.get(4));
-                } catch (IndexOutOfBoundsException ioobe) {
-                    System.out.println("Index out of bounds, no plane class prices entered!!!");
+                } catch (Exception e) {
+                    System.out.println("Something went wrong!!!");
                 }
 
                 ps.executeUpdate();
 
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                System.out.println("Zrakoplov nije dodan u db, unesite barem jednu klasu i njenu cijenu!");
             }
         }
     }

@@ -97,9 +97,12 @@ public class AdminFrame extends JFrame implements ActionListener {
         adminPanel.setPlaneCreationListener(new PlaneCreationListener() {
             @Override
             public void createBtnPressed() {
+                System.out.println(adminPanel.getNewPlaneSpecs());
                 if (adminPanel.getNewPlaneSpecs().get(0).isEmpty() || adminPanel.getNewPlaneSpecs().get(1).isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Ime zrakoplova i proizvođaća moraju biti ispunjeni!", "Nepotpune informacije", JOptionPane.ERROR_MESSAGE);
-                }else {
+                } else if (adminPanel.getNewPlaneSpecs().get(2).equals("0") && adminPanel.getNewPlaneSpecs().get(3).equals("0") && adminPanel.getNewPlaneSpecs().get(4).equals("0")) {
+                    JOptionPane.showMessageDialog(null, "Morate odabrati i unijeti cijenu barem jedom razredu (Ako je jedna unesena mora biti >0)!", "Nepotpune informacije!", JOptionPane.ERROR_MESSAGE);
+                } else {
                     kontroler.addPlaneToDB(adminPanel.getNewPlaneSpecs());
                     adminPanel.resetCreatePanelForm();
                     JOptionPane.showMessageDialog(null, "Novi avion uspješno dodan!", "Uspješno dodavanje", JOptionPane.INFORMATION_MESSAGE);
