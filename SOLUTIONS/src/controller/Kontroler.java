@@ -360,8 +360,9 @@ public class Kontroler {
                 try (ResultSet rs = ps.executeQuery()){
                     while (rs.next()){
                         String planeName = rs.getString("name");
+                        int planeID = rs.getInt("id");
 
-                        dataBase.addToUnassignedPlanes(planeName);
+                        dataBase.addToUnassignedPlanes(planeName + "," + planeID);
                     }
                 }
             } catch (SQLException e) {

@@ -26,7 +26,9 @@ public class CreateFlightPanel extends JPanel implements ActionListener {
     private JButton createFlightButton;
 
     private List<String> allFlights;
+    private String[] planeData;
     private String[] planeNames;
+    private String[] planeIDs;
     private List<String> newFlightSpecs;
 
     private Kontroler kontroler;
@@ -45,10 +47,18 @@ public class CreateFlightPanel extends JPanel implements ActionListener {
         allFlights = kontroler.getAllUnassignedPlaneNames();
         newFlightSpecs = new ArrayList<>();
 
+        planeData = new String[allFlights.size()];
         planeNames = new String[allFlights.size()];
+        planeIDs = new String[allFlights.size()];
+
         for (int i = 0; i < allFlights.size(); i++) {
-            planeNames[i] = kontroler.getAllUnassignedPlaneNames().get(i);
+            planeData[i] = kontroler.getAllUnassignedPlaneNames().get(i);
             System.out.println("start" + kontroler.getAllUnassignedPlaneNames().get(i));
+        }
+
+        for (int i = 0; i < allFlights.size(); i++) {
+            planeNames[i] = planeData[i].split(",")[0];
+            planeIDs[i] = planeData[i].split(",")[1];
         }
 
         planes = new JComboBox<>(planeNames);
@@ -145,7 +155,7 @@ public class CreateFlightPanel extends JPanel implements ActionListener {
             if (singleButtonOnPanelListener != null && !departureField.getText().isEmpty() && !destinationField.getText().isEmpty()) {
                 newFlightSpecs.clear();
 
-                newFlightSpecs.add(planes.getSelectedItem().toString());
+                newFlightSpecs.add(planeIDs[planes.getSelectedIndex()]);
                 newFlightSpecs.add(departureField.getText());
                 newFlightSpecs.add(destinationField.getText());
 
