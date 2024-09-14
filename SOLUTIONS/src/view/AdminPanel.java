@@ -36,6 +36,7 @@ public class AdminPanel extends JPanel {
 
     }
 
+    // Stvaranje zrakoplova u admin panelu
     public void setPlaneCreationListener(PlaneCreationListener listener) {
         createPlanePanel.setPlaneCreationListener(listener);
     }
@@ -44,7 +45,18 @@ public class AdminPanel extends JPanel {
         return createPlanePanel.getNewPlaneSpecs();
     }
 
-    public void resetCreatePanelForm(){
+    public void resetCreatePanelForm() {
         createPlanePanel.resetForm();
     }
+
+    // Stvaranje letova u admin panelu
+    public void setFlightCreationListener(SingleButtonOnPanelListener listener) {
+        createFlightPanel.setBookingListener(listener);
+    }
+
+    public List<String> getNewFlightSpecs(){
+        return createFlightPanel.getNewFlightSpecs();
+    }
+
+
 }

@@ -2,15 +2,16 @@ package view;
 
 import com.toedter.calendar.JDateChooser;
 import controller.Kontroler;
-import model.Flight;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Calendar;
-import java.util.Date;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.List;
 
-public class CreateFlightPanel extends JPanel {
+public class CreateFlightPanel extends JPanel implements ActionListener {
 
     private JComboBox<String> planes;
     private JTextField departureField;
@@ -19,16 +20,22 @@ public class CreateFlightPanel extends JPanel {
 //    private JCalendar dateField;
     private JDateChooser dateChooser;
 
+    private SimpleDateFormat sdf;
+    private SimpleDateFormat timeFormat;
+
     private JButton createFlightButton;
 
     private List<String> allFlights;
     private String[] planeNames;
+    private List<String> newFlightSpecs;
 
     private Kontroler kontroler;
+    private SingleButtonOnPanelListener singleButtonOnPanelListener;
 
     public CreateFlightPanel() {
         initComps();
         layoutComps();
+        activateComps();
     }
 
     private void initComps() {
@@ -36,6 +43,7 @@ public class CreateFlightPanel extends JPanel {
         kontroler.connectToDatabase();
 
         allFlights = kontroler.getAllUnassignedPlaneNames();
+        newFlightSpecs = new ArrayList<>();
 
         planeNames = new String[allFlights.size()];
         for (int i = 0; i < allFlights.size(); i++) {
@@ -61,7 +69,11 @@ public class CreateFlightPanel extends JPanel {
         dateChooser.setDateFormatString("yyyy-MM-dd");
         dateChooser.setPreferredSize(new Dimension(departureField.getPreferredSize().width, departureField.getPreferredSize().height));
 
+        sdf = new SimpleDateFormat("yyyy-MM-dd");
+        timeFormat = new SimpleDateFormat("HH:mm:ss");
+
         createFlightButton = new JButton("Dodaj let");
+        createFlightButton.setActionCommand("createFlight");
     }
 
     private void layoutComps() {
@@ -117,5 +129,42 @@ public class CreateFlightPanel extends JPanel {
         gbc.insets = new Insets(15,0,0,0);
 
         add(createFlightButton, gbc);
+    }
+
+    private void activateComps() {
+        createFlightButton.addActionListener(this);
+    }
+
+    public void setBookingListener(SingleButtonOnPanelListener listener) {
+        this.singleButtonOnPanelListener = listener;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        try {
+            if (singleButtonOnPanelListener != null && !departureField.getText().isEmpty() && !destinationField.getText().isEmpty()) {
+                newFlightSpecs.clear();
+
+                newFlightSpecs.add(planes.getSelectedItem().toString());
+                newFlightSpecs.add(departureField.getText());
+                newFlightSpecs.add(destinationField.getText());
+
+                String dateOfTakeOff = sdf.format(dateChooser.getDate());
+                String timeOfTakeOff = timeFormat.format(departureTimeSpinner.getValue());
+
+                newFlightSpecs.add(dateOfTakeOff + " " + timeOfTakeOff);
+
+                singleButtonOnPanelListener.bookButtonClicked(e.getActionCommand());
+            }else {
+                JOptionPane.showMessageDialog(null, "Niste unijeli sva polja!", "Nedostaju podaci", JOptionPane.ERROR_MESSAGE);
+            }
+        }catch (NullPointerException npe){
+            JOptionPane.showMessageDialog(null, "Datum nije u pravilnom formatu! (yyyy-MM-dd)", "Nepravilan format datuma", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    public List<String> getNewFlightSpecs() {
+        return newFlightSpecs;
     }
 }

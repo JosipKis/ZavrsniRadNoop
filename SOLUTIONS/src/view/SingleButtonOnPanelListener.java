@@ -2,7 +2,7 @@ package view;
 
 import java.util.EventListener;
 
-public interface BookingListener extends EventListener {
+public interface SingleButtonOnPanelListener extends EventListener {
 
     void bookButtonClicked(String button);
 }

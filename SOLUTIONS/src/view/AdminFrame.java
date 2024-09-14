@@ -124,6 +124,16 @@ public class AdminFrame extends JFrame implements ActionListener {
                 }
             }
         });
+
+        adminPanel.setFlightCreationListener(new SingleButtonOnPanelListener() {
+            @Override
+            public void bookButtonClicked(String button) {
+                if (button.equals("createFlight")){
+                    System.out.println(adminPanel.getNewFlightSpecs());
+                    System.out.println("Flight created (not really)");
+                }
+            }
+        });
     }
 
     @Override

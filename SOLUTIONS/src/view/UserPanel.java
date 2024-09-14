@@ -1,7 +1,5 @@
 package view;
 
-import controller.command.*;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -38,8 +36,8 @@ public class UserPanel extends JPanel {
         userFlightOptionsPanel.setComboBoxListener(comboBoxListener);
     }
 
-    public void setBookingListener(BookingListener bookingListener){
-        userFlightFinalizationPanel.setBookingListener(bookingListener);
+    public void setBookingListener(SingleButtonOnPanelListener singleButtonOnPanelListener){
+        userFlightFinalizationPanel.setBookingListener(singleButtonOnPanelListener);
     }
 
     public void setText(String text){

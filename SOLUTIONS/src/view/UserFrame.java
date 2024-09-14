@@ -121,7 +121,7 @@ public class UserFrame extends JFrame implements ActionListener {
     }
 
     private void activateUserFrame() {
-        userPanel.setBookingListener(new BookingListener() {
+        userPanel.setBookingListener(new SingleButtonOnPanelListener() {
             @Override
             public void bookButtonClicked(String button) {
                 List<String> lista = flightListPanel.getDetailsOfFlight();

@@ -12,7 +12,7 @@ public class UserFlightFinalizationPanel extends JPanel implements ActionListene
 
     private JButton bookButton;
 
-    private BookingListener boogkingListener;
+    private SingleButtonOnPanelListener boogkingListener;
 
     public UserFlightFinalizationPanel(){
         super();
@@ -63,7 +63,7 @@ public class UserFlightFinalizationPanel extends JPanel implements ActionListene
         bookButton.addActionListener(this);
     }
 
-    public void setBookingListener(BookingListener boogkingListener){
+    public void setBookingListener(SingleButtonOnPanelListener boogkingListener){
         this.boogkingListener = boogkingListener;
     }
 

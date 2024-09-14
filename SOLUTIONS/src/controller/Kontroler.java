@@ -321,6 +321,32 @@ public class Kontroler {
         }
     }
 
+    public void addFlightToDB(List<String> newFlightDetails){
+        if (con != null){
+            try {
+                String query = "INSERT INTO Flights (plane, departure, destination, departure_time) " +
+                        "VALUES (?, ?, ?, ?);";
+
+                PreparedStatement ps = con.prepareStatement(query);
+
+                try {
+                    ps.setString(1, newFlightDetails.get(0));
+                    ps.setString(2, newFlightDetails.get(1));
+                    ps.setString(3, newFlightDetails.get(2));
+                    ps.setString(4, newFlightDetails.get(3));
+
+                } catch (Exception e) {
+                    System.out.println("Something went wrong!!!");
+                }
+
+                ps.executeUpdate();
+
+            } catch (SQLException e) {
+                System.out.println("Let nije dodan u db");
+            }
+        }
+    }
+
     public List<String> getAllUnassignedPlaneNames(){
         if (con != null){
             dataBase.resetUnassignedPlanes();
