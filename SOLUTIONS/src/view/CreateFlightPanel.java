@@ -41,7 +41,7 @@ public class CreateFlightPanel extends JPanel implements ActionListener {
     }
 
     private void initComps() {
-        kontroler = new Kontroler();
+        kontroler = Kontroler.getInstance();
         kontroler.connectToDatabase();
 
         allFlights = kontroler.getAllUnassignedPlaneNames();

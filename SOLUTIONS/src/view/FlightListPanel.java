@@ -38,7 +38,7 @@ public class FlightListPanel extends JPanel {
     }
 
     private void initComps() {
-        kontroler = new Kontroler();
+        kontroler = Kontroler.getInstance();
         dataBase = new DataBase();
 
         try {

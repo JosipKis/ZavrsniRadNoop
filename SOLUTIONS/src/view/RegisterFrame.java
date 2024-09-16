@@ -28,7 +28,7 @@ public class RegisterFrame extends JFrame {
     }
 
     private void initComps() {
-        kontroler = new Kontroler();
+        kontroler = Kontroler.getInstance();
         try {
             kontroler.connectToDatabase();
         } catch (Exception e) {

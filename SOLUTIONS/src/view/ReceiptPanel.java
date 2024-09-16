@@ -26,7 +26,7 @@ public class ReceiptPanel extends JPanel {
     }
 
     private void initComps() {
-        kontroler = new Kontroler();
+        kontroler = Kontroler.getInstance();
 
         plane = new JTextField(flightDetails.get(0));
         takeOffCity = new JTextField(flightDetails.get(1));

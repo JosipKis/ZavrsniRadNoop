@@ -43,7 +43,7 @@ public class UserFrame extends JFrame implements ActionListener {
     }
 
     private void initComps() {
-        kontroler = new Kontroler();
+        kontroler = Kontroler.getInstance();
         kontroler.connectToDatabase();
 
         commandInvoker = new CommandInvoker();

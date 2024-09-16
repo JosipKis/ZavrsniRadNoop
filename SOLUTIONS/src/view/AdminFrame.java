@@ -40,7 +40,7 @@ public class AdminFrame extends JFrame implements ActionListener {
     }
 
     private void initComps() {
-        kontroler = new Kontroler();
+        kontroler = Kontroler.getInstance();
         kontroler.connectToDatabase();
 
         adminPanel = new AdminPanel();

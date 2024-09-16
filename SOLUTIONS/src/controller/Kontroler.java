@@ -25,7 +25,9 @@ public class Kontroler {
     private DataBase dataBase;
     private static List<Integer> classPrices;
 
-    public Kontroler() {
+    private static Kontroler kontroler;
+
+    private Kontroler() {
         dataBase = new DataBase();
         classPrices = new ArrayList<>();
     }
@@ -386,5 +388,13 @@ public class Kontroler {
 
     public static List<Integer> getClassPrices() {
         return classPrices;
+    }
+
+    public static Kontroler getInstance() {
+        if (kontroler == null) {
+            kontroler = new Kontroler();
+        }
+
+        return kontroler;
     }
 }

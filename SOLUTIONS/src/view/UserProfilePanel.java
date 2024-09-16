@@ -34,7 +34,7 @@ public class UserProfilePanel extends JPanel implements ActionListener {
     }
 
     private void initComps() {
-        kontroler = new Kontroler();
+        kontroler = Kontroler.getInstance();
         kontroler.connectToDatabase();
 
         textField = new JTextField();

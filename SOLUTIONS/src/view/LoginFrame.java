@@ -36,7 +36,7 @@ public class LoginFrame extends JFrame {
             System.err.println( "Failed to initialize LaF" );
         }
 
-        kontroler = new Kontroler();
+        kontroler = Kontroler.getInstance();
         try {
             kontroler.connectToDatabase();
         } catch (Exception e) {
