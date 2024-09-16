@@ -28,7 +28,7 @@ public class UserProfileFrame extends JFrame implements ActionListener {
     public UserProfileFrame() {
         super("Moj profil");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(900, 600);
+        setSize(600, 400);
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -91,16 +91,21 @@ public class UserProfileFrame extends JFrame implements ActionListener {
         userProfilePanel.setSingleUseListener(new SingleButtonOnPanelListener() {
             @Override
             public void bookButtonClicked(String button) {
-                List<String> flightDetails = new ArrayList<>();
-                flightDetails.add(userProfilePanel.getSelectedTicketDetails().getPlane());
-                flightDetails.add(userProfilePanel.getSelectedTicketDetails().getTakeOffCity());
-                flightDetails.add(userProfilePanel.getSelectedTicketDetails().getDestinationCity());
-                flightDetails.add(userProfilePanel.getSelectedTicketDetails().getStartDate());
-                flightDetails.add(userProfilePanel.getSelectedTicketDetails().getStartTime());
-                flightDetails.add(userProfilePanel.getSelectedTicketDetails().getTotalPrice());
+                try {
+                    List<String> flightDetails = new ArrayList<>();
+                    flightDetails.add(userProfilePanel.getSelectedTicketDetails().getPlane());
+                    flightDetails.add(userProfilePanel.getSelectedTicketDetails().getTakeOffCity());
+                    flightDetails.add(userProfilePanel.getSelectedTicketDetails().getDestinationCity());
+                    flightDetails.add(userProfilePanel.getSelectedTicketDetails().getStartDate());
+                    flightDetails.add(userProfilePanel.getSelectedTicketDetails().getStartTime());
+                    flightDetails.add(userProfilePanel.getSelectedTicketDetails().getTotalPrice());
 
-                System.out.println(flightDetails);
-                new Print2PDF(flightDetails);
+                    System.out.println(flightDetails);
+                    userProfilePanel.resetFunctionallity();
+                    new Print2PDF(flightDetails);
+                }catch (NullPointerException npe){
+                    JOptionPane.showMessageDialog(null, "Molimo odaberite jedan let za ispis karte!", "Karta nije odabrana", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }

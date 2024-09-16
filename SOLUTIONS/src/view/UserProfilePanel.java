@@ -91,16 +91,19 @@ public class UserProfilePanel extends JPanel implements ActionListener {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.NORTH;
+        gbc.insets = new Insets(0,0,20,0);
 
         add(scrollPane, gbc);
         gbc.gridy++;
         gbc.anchor = GridBagConstraints.CENTER;
+        gbc.insets = new Insets(0,0,0,0);
 
         add(new JLabel("Odabrana karta: "), gbc);
         gbc.gridy++;
 
         add(textField, gbc);
         gbc.gridy++;
+        gbc.insets = new Insets(10,0,0,0);
 
         add(printSelectedButton, gbc);
     }
@@ -123,5 +126,9 @@ public class UserProfilePanel extends JPanel implements ActionListener {
 
     public Ticket getSelectedTicketDetails(){
         return selectedTicketDetails;
+    }
+
+    public void resetFunctionallity(){
+        selectedTicketDetails = null;
     }
 }
