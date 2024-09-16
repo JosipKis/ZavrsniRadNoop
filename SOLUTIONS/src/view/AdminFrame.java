@@ -104,7 +104,7 @@ public class AdminFrame extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Morate odabrati i unijeti cijenu barem jedom razredu (Ako je jedna unesena mora biti >0)!", "Nepotpune informacije!", JOptionPane.ERROR_MESSAGE);
                 } else {
                     kontroler.addPlaneToDB(adminPanel.getNewPlaneSpecs());
-                    adminPanel.resetCreatePanelForm();
+                    adminPanel.resetCreateFlightPanelForm();
                     JOptionPane.showMessageDialog(null, "Novi avion uspješno dodan!", "Uspješno dodavanje", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
@@ -131,7 +131,7 @@ public class AdminFrame extends JFrame implements ActionListener {
                 if (button.equals("createFlight")){
                     kontroler.addFlightToDB(adminPanel.getNewFlightSpecs());
                     System.out.println("Flight added to db!");
-                    // Potrebno napraviti resetForme !!!!
+                    adminPanel.resetCreateFlightPanel();
                 }
             }
         });

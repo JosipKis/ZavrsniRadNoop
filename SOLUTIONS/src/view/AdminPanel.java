@@ -45,7 +45,7 @@ public class AdminPanel extends JPanel {
         return createPlanePanel.getNewPlaneSpecs();
     }
 
-    public void resetCreatePanelForm() {
+    public void resetCreateFlightPanelForm() {
         createPlanePanel.resetForm();
     }
 
@@ -58,5 +58,7 @@ public class AdminPanel extends JPanel {
         return createFlightPanel.getNewFlightSpecs();
     }
 
-
+    public void resetCreateFlightPanel(){
+        createFlightPanel.resetCreateFlightForm();
+    }
 }

@@ -23,8 +23,6 @@ public class UserFrame extends JFrame implements ActionListener {
     private JRadioButtonMenuItem darkThemeRB;
     private ButtonGroup buttonGroup;
 
-    private UserPanelListener userPanelListener;
-
     private Kontroler kontroler;
     private CommandInvoker commandInvoker;
 

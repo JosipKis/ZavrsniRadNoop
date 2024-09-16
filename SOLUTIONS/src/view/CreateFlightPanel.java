@@ -177,4 +177,10 @@ public class CreateFlightPanel extends JPanel implements ActionListener {
     public List<String> getNewFlightSpecs() {
         return newFlightSpecs;
     }
+
+    public void resetCreateFlightForm(){
+        departureField.setText("");
+        destinationField.setText("");
+        planes.requestFocus();
+    }
 }
