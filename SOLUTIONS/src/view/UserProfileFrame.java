@@ -1,11 +1,15 @@
 package view;
 
 import controller.Kontroler;
+import model.Print2PDF;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserProfileFrame extends JFrame implements ActionListener {
 
@@ -28,6 +32,10 @@ public class UserProfileFrame extends JFrame implements ActionListener {
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
+        URL iconURL = getClass().getResource("icons/airplane.png");
+        assert iconURL != null;
+        ImageIcon icon = new ImageIcon(iconURL);
+        setIconImage(icon.getImage());
         initComps();
         layoutComps();
         activateFrame();
@@ -80,7 +88,21 @@ public class UserProfileFrame extends JFrame implements ActionListener {
     }
 
     private void activateFrame() {
+        userProfilePanel.setSingleUseListener(new SingleButtonOnPanelListener() {
+            @Override
+            public void bookButtonClicked(String button) {
+                List<String> flightDetails = new ArrayList<>();
+                flightDetails.add(userProfilePanel.getSelectedTicketDetails().getPlane());
+                flightDetails.add(userProfilePanel.getSelectedTicketDetails().getTakeOffCity());
+                flightDetails.add(userProfilePanel.getSelectedTicketDetails().getDestinationCity());
+                flightDetails.add(userProfilePanel.getSelectedTicketDetails().getStartDate());
+                flightDetails.add(userProfilePanel.getSelectedTicketDetails().getStartTime());
+                flightDetails.add(userProfilePanel.getSelectedTicketDetails().getTotalPrice());
 
+                System.out.println(flightDetails);
+                new Print2PDF(flightDetails);
+            }
+        });
     }
 
     @Override
