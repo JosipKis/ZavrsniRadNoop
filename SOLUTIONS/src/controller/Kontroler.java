@@ -100,6 +100,7 @@ public class Kontroler {
 
     public List<Flight> getAllFlights(){
         if (con != null){
+            dataBase.resetFlightsList();
             String dbQuery = "SELECT * FROM Flights";
             try (PreparedStatement selectStm = con.prepareStatement(dbQuery)) {
                 try (ResultSet resultSet = selectStm.executeQuery()) {

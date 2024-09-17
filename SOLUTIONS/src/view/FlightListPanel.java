@@ -7,6 +7,7 @@ import model.Flight;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
@@ -62,6 +63,7 @@ public class FlightListPanel extends JPanel {
         table.setDefaultRenderer(Object.class, centerRenderer);
 
         scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setPreferredSize(new Dimension(600,249));
     }
 
     private void layoutComps() {

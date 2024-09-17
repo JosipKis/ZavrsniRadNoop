@@ -52,7 +52,7 @@ public class UserFrame extends JFrame implements ActionListener {
         flightListPanel.setPreferredSize(new Dimension(300, 250));
 
         userPanel = new UserPanel(flightListPanel);
-        userPanel.setPreferredSize(new Dimension(690, 210));
+        userPanel.setPreferredSize(new Dimension(690, 208));
         userPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         flightListPanel.activateTable(flightListPanel.getDaTable(), userPanel);

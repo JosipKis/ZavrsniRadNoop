@@ -32,6 +32,10 @@ public class DataBase {
         return flights;
     }
 
+    public void resetFlightsList(){
+        flights.clear();
+    }
+
     public void setFlights(List<Flight> flights) {
         this.flights = flights;
     }
