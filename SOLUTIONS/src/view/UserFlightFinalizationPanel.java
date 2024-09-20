@@ -1,11 +1,16 @@
 package view;
 
+import model.observer.AuxCLS;
+import model.observer.ObservablePanel;
+import model.observer.ObserverInt;
+import model.observer.RegistrationInt;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UserFlightFinalizationPanel extends JPanel implements ActionListener {
+public class UserFlightFinalizationPanel extends JPanel implements ActionListener, RegistrationInt {
 
     private JTextArea flightDetails;
     private JTextField totalPrice;
@@ -13,6 +18,8 @@ public class UserFlightFinalizationPanel extends JPanel implements ActionListene
     private JButton bookButton;
 
     private SingleButtonOnPanelListener boogkingListener;
+
+    private AuxCLS auxCLS;
 
     public UserFlightFinalizationPanel(){
         super();
@@ -22,6 +29,8 @@ public class UserFlightFinalizationPanel extends JPanel implements ActionListene
     }
 
     private void initComps() {
+        auxCLS = AuxCLS.getInstance();
+
         flightDetails = new JTextArea();
         flightDetails.setPreferredSize(new Dimension(200, 80));
         flightDetails.setEditable(false);
@@ -88,5 +97,21 @@ public class UserFlightFinalizationPanel extends JPanel implements ActionListene
 
     public String getTotalPrice(){
         return totalPrice.getText();
+    }
+
+    @Override
+    public void registerObserver(ObservablePanel observer) {
+        observer.addObserver(this);
+    }
+
+    @Override
+    public void removeObserver(ObservablePanel observer) {
+        observer.removeObserver(this);
+    }
+
+    @Override
+    public void update(String text) {
+        System.out.println("Notification successful");
+        flightDetails.setText(auxCLS.getText());
     }
 }

@@ -2,6 +2,7 @@ package view;
 
 import controller.Kontroler;
 import controller.command.*;
+import model.observer.ObservablePanelCLS;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,6 +26,7 @@ public class UserFrame extends JFrame implements ActionListener {
 
     private Kontroler kontroler;
     private CommandInvoker commandInvoker;
+
 
     public UserFrame() {
         super("Mr. KIŠ FLIGHTS");

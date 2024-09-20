@@ -1,5 +1,7 @@
 package view;
 
+import model.observer.ObservablePanelCLS;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,7 +10,7 @@ public class UserPanel extends JPanel {
     private UserFlightOptionsPanel userFlightOptionsPanel;
     private UserFlightFinalizationPanel userFlightFinalizationPanel;
 
-
+    private ObservablePanelCLS observablePanelCLS;
 
     public UserPanel(FlightListPanel flightListPanel) {
         super();
@@ -17,12 +19,17 @@ public class UserPanel extends JPanel {
     }
 
     private void initComps() {
+        observablePanelCLS = ObservablePanelCLS.getInstance();
+
         userFlightOptionsPanel = new UserFlightOptionsPanel();
         userFlightOptionsPanel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
         userFlightOptionsPanel.activatePanel(this);
 
         userFlightFinalizationPanel = new UserFlightFinalizationPanel();
         userFlightFinalizationPanel.setBorder(BorderFactory.createLineBorder(Color.RED));
+        userFlightFinalizationPanel.registerObserver(observablePanelCLS);
+
+        observablePanelCLS.printObservers();
     }
 
     private void layoutComps() {

@@ -3,6 +3,8 @@ package view;
 import controller.Kontroler;
 import model.DataBase;
 import model.Flight;
+import model.observer.AuxCLS;
+import model.observer.ObservablePanelCLS;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -24,6 +26,8 @@ public class FlightListPanel extends JPanel {
 
     private Kontroler kontroler;
     private DataBase dataBase;
+    private ObservablePanelCLS observablePanelCLS;
+    private AuxCLS auxCLS;
 
     private String planeID;
     private List<Integer> planeClasses;
@@ -41,6 +45,8 @@ public class FlightListPanel extends JPanel {
     private void initComps() {
         kontroler = Kontroler.getInstance();
         dataBase = new DataBase();
+        observablePanelCLS = ObservablePanelCLS.getInstance();
+        auxCLS = AuxCLS.getInstance();
 
         try {
             kontroler.connectToDatabase();
@@ -134,12 +140,14 @@ public class FlightListPanel extends JPanel {
                         }
 
                         if (userPanel != null) {
-                            userPanel.setText(flightSelection.toString());
                             planeClasses = kontroler.getPlaneClasses(target.getValueAt(row, 0).toString());
                             System.out.println(target.getValueAt(row, 0));
                             userPanel.disableOptions();
                             userPanel.enableSelection(planeClasses.get(0), planeClasses.get(1), planeClasses.get(2));
                         }
+                        auxCLS.setText(flightSelection.toString());
+                        observablePanelCLS.notifyObservers(auxCLS.getText());
+                        observablePanelCLS.printObservers();
                         System.out.println(flightSelection);
                     }else {
                         System.out.println("Flight not flying");
