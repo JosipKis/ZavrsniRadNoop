@@ -2,7 +2,6 @@ package view;
 
 import model.observer.AuxCLS;
 import model.observer.ObservablePanel;
-import model.observer.ObserverInt;
 import model.observer.RegistrationInt;
 
 import javax.swing.*;
@@ -112,6 +111,11 @@ public class UserFlightFinalizationPanel extends JPanel implements ActionListene
     @Override
     public void update(String text) {
         System.out.println("Notification successful");
-        flightDetails.setText(auxCLS.getText());
+        String[] data = auxCLS.getText().split(",");
+        flightDetails.setText(" " +data[0]);
+        flightDetails.append("\n" + data[1]);
+        flightDetails.append("\n" + data[2]);
+        flightDetails.append("\n" + data[3]);
+        flightDetails.append("\n" + data[4]);
     }
 }
