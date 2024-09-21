@@ -1,4 +1,4 @@
-package model.strategy;
+package controller.strategy;
 
 import controller.Kontroler;
 
@@ -16,7 +16,6 @@ public class AddPlaneToDBStrategy implements PressedButtonStrategy {
     @Override
     public void pressedButton(List<String> planeData) {
         kontroler.addPlaneToDB(planeData);
-        System.out.println(planeData + " by using strategy pattern.");
         kontroler.dissconnect();
     }
 }

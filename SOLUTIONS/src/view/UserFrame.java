@@ -2,7 +2,7 @@ package view;
 
 import controller.Kontroler;
 import controller.command.*;
-import model.observer.ObservablePanelCLS;
+import controller.strategy.ButtonInspector;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,9 +24,10 @@ public class UserFrame extends JFrame implements ActionListener {
     private JRadioButtonMenuItem darkThemeRB;
     private ButtonGroup buttonGroup;
 
+    private ButtonInspector buttonInspector;
+
     private Kontroler kontroler;
     private CommandInvoker commandInvoker;
-
 
     public UserFrame() {
         super("Mr. KIŠ FLIGHTS");
@@ -127,7 +128,8 @@ public class UserFrame extends JFrame implements ActionListener {
                 System.out.println(lista);
                 if (lista != null  && userPanel.isAClassSelected()){
                     lista.add(userPanel.getTotalPriceText());
-                    kontroler.addTicketToDb(lista);
+                    buttonInspector = new ButtonInspector(button);
+                    buttonInspector.pressedButton(lista);
                     dispose();
                     new Receipt4FlightFrame(lista);
                 }else {

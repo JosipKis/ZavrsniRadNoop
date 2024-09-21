@@ -103,7 +103,7 @@ public class RegisterPanel extends JPanel implements ActionListener {
         return new String(password.getPassword());
     }
 
-    public int getAge() {
-        return Integer.parseInt(age.getText());
+    public String getAge() {
+        return age.getText();
     }
 }

@@ -1,7 +1,7 @@
 package view;
 
 import controller.Kontroler;
-import model.strategy.ButtonInspector;
+import controller.strategy.ButtonInspector;
 
 import javax.swing.*;
 import java.awt.*;

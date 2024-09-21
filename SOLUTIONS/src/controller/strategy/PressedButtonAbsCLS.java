@@ -1,12 +1,13 @@
-package model.strategy;
+package controller.strategy;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class PressedButtonAbsCLS {
 
     protected AddPlaneToDBStrategy addPlaneToDBStrategy;
     protected AddFlightToDBStrategy addFlightToDBStrategy;
+    protected AddTicketToDBStrategy addTicketToDBStrategy;
+    protected AddNewUserToDBStrategy addNewUserToDBStrategy;
 
     protected PressedButtonStrategy pressedButtonStrategy;
 

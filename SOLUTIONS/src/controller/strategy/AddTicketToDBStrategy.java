@@ -1,21 +1,20 @@
-package model.strategy;
+package controller.strategy;
 
 import controller.Kontroler;
 
 import java.util.List;
 
-public class AddFlightToDBStrategy implements PressedButtonStrategy{
+public class AddTicketToDBStrategy implements  PressedButtonStrategy{
 
     private Kontroler kontroler;
 
-    public AddFlightToDBStrategy() {
+    public AddTicketToDBStrategy() {
         kontroler = Kontroler.getInstance();
         kontroler.connectToDatabase();
     }
 
     @Override
     public void pressedButton(List<String> data) {
-        System.out.println("Flight data: " + data + " added to database.");
-        kontroler.addFlightToDB(data);
+        kontroler.addTicketToDb(data);
     }
 }

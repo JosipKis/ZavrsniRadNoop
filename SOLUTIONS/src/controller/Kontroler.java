@@ -81,8 +81,12 @@ public class Kontroler {
         }
     }
 
-    public void registerNewUser(String username, String password, int age){
+    public void registerNewUser(List<String> data){
         try{
+            String username = data.get(0);
+            String password = data.get(1);
+            int age = Integer.parseInt(data.get(2));
+
             String INSERT_USER_QUERY = "INSERT INTO User (username, password, age) VALUES (?, ?, ?)";
             PreparedStatement preparedStatement = con.prepareStatement(INSERT_USER_QUERY);
 
@@ -150,7 +154,6 @@ public class Kontroler {
 
     public List<Integer> getPlaneClasses(String name){
         if (con != null) {
-            System.out.println(name);
             String query = "SELECT * FROM Plane WHERE name = ?;";
 
             try (PreparedStatement selectStm = con.prepareStatement(query)) {
@@ -204,7 +207,6 @@ public class Kontroler {
                         ticket.setTotalPrice(resultSet.getString("totalPrice"));
 
                         dataBase.addTickets4User(ticket);
-                        System.out.println(ticket.toString());
                     }
                 }
 

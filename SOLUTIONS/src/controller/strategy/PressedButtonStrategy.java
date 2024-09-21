@@ -1,6 +1,5 @@
-package model.strategy;
+package controller.strategy;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface PressedButtonStrategy {
