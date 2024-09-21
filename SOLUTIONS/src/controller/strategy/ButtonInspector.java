@@ -5,17 +5,17 @@ import java.util.List;
 public class ButtonInspector extends PressedButtonAbsCLS{
 
     public ButtonInspector(String button) {
-        this.pressedButtonStrategy = new AddPlaneToDBStrategy();
-        this.pressedButtonStrategy = new AddFlightToDBStrategy();
+        this.addPlaneToDBStrategy = new AddPlaneToDBStrategy();
+        this.addFlightToDBStrategy = new AddFlightToDBStrategy();
         this.addTicketToDBStrategy = new AddTicketToDBStrategy();
         this.addNewUserToDBStrategy = new AddNewUserToDBStrategy();
 
         switch (button){
             case "createPlane":
-                setPressedButtonStrategy(pressedButtonStrategy);
+                setPressedButtonStrategy(addPlaneToDBStrategy);
                 break;
             case "createFlight":
-                setPressedButtonStrategy(new AddFlightToDBStrategy());
+                setPressedButtonStrategy(addFlightToDBStrategy);
                 break;
             case "book":
                 setPressedButtonStrategy(addTicketToDBStrategy);

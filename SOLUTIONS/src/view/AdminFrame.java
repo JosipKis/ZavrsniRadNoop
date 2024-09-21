@@ -110,6 +110,9 @@ public class AdminFrame extends JFrame implements ActionListener {
                     buttonInspector.pressedButton(adminPanel.getNewPlaneSpecs());
                     adminPanel.resetCreateFlightPanelForm();
                     JOptionPane.showMessageDialog(null, "Novi avion uspješno dodan!", "Uspješno dodavanje", JOptionPane.INFORMATION_MESSAGE);
+
+                    revalidate();
+                    repaint();
                 }
             }
 
