@@ -55,12 +55,11 @@ public class UserFrame extends JFrame implements ActionListener {
 
         userPanel = new UserPanel(flightListPanel);
         userPanel.setPreferredSize(new Dimension(690, 208));
-        userPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        userPanel.setBorder(BorderFactory.createTitledBorder("Korisnička forma"));
 
         flightListPanel.activateTable(flightListPanel.getDaTable(), userPanel);
 
         menuBar = new JMenuBar();
-        menuBar.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         jMenu = new JMenu("IZBORNIK");
 
         odjavaBtn = new JMenuItem("ODJAVA");
@@ -175,6 +174,7 @@ public class UserFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "odjava":
+                kontroler.dissconnect();
                 dispose();
                 new LoginFrame();
                 break;

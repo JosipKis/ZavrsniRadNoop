@@ -1,6 +1,7 @@
 package view;
 
 import controller.Kontroler;
+import model.strategy.ButtonInspector;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +21,8 @@ public class AdminFrame extends JFrame implements ActionListener {
     private JRadioButtonMenuItem lightThemeRB;
     private JRadioButtonMenuItem darkThemeRB;
     private ButtonGroup buttonGroup;
+
+    private ButtonInspector buttonInspector;
 
     private Kontroler kontroler;
 
@@ -103,7 +106,8 @@ public class AdminFrame extends JFrame implements ActionListener {
                 } else if (adminPanel.getNewPlaneSpecs().get(2).equals("0") && adminPanel.getNewPlaneSpecs().get(3).equals("0") && adminPanel.getNewPlaneSpecs().get(4).equals("0")) {
                     JOptionPane.showMessageDialog(null, "Morate odabrati i unijeti cijenu barem jedom razredu (Ako je jedna unesena mora biti >0)!", "Nepotpune informacije!", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    kontroler.addPlaneToDB(adminPanel.getNewPlaneSpecs());
+                    buttonInspector = new ButtonInspector("createPlane");
+                    buttonInspector.pressedButton(adminPanel.getNewPlaneSpecs());
                     adminPanel.resetCreateFlightPanelForm();
                     JOptionPane.showMessageDialog(null, "Novi avion uspješno dodan!", "Uspješno dodavanje", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -142,6 +146,7 @@ public class AdminFrame extends JFrame implements ActionListener {
         String actionCommand = e.getActionCommand();
         switch (actionCommand) {
             case "odjava":
+                kontroler.dissconnect();
                 dispose();
                 new LoginFrame();
                 break;

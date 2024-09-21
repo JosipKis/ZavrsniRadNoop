@@ -22,11 +22,9 @@ public class UserPanel extends JPanel {
         observablePanelCLS = ObservablePanelCLS.getInstance();
 
         userFlightOptionsPanel = new UserFlightOptionsPanel();
-        userFlightOptionsPanel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
         userFlightOptionsPanel.activatePanel(this);
 
         userFlightFinalizationPanel = new UserFlightFinalizationPanel();
-        userFlightFinalizationPanel.setBorder(BorderFactory.createLineBorder(Color.RED));
         userFlightFinalizationPanel.registerObserver(observablePanelCLS);
 
         observablePanelCLS.printObservers();
