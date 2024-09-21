@@ -33,12 +33,10 @@ public class Kontroler {
     }
 
     public void connectToDatabase() {
-        System.out.println("Connecting to database...");
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-            System.out.println("Connected to -> " + con.toString());
         } catch (ClassNotFoundException e) {
             System.out.println("Could not load driver!!!");
         } catch (SQLException e) {
@@ -154,12 +152,10 @@ public class Kontroler {
         if (con != null) {
             System.out.println(name);
             String query = "SELECT * FROM Plane WHERE name = ?;";
-            System.out.println("query passes");
+
             try (PreparedStatement selectStm = con.prepareStatement(query)) {
-                System.out.println("1st");
                 selectStm.setString(1, name);
                 try (ResultSet resultSet = selectStm.executeQuery()) {
-                    System.out.println("2nd");
                     while (resultSet.next()){
                         dataBase.resetPlaneClasses();
                         classPrices.clear();
@@ -253,7 +249,6 @@ public class Kontroler {
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     String theme = rs.getString("theme");
-                    System.out.println("Theme fetched: " + theme);
                     return theme;
                 }
 

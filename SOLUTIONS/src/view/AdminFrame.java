@@ -133,9 +133,10 @@ public class AdminFrame extends JFrame implements ActionListener {
             @Override
             public void bookButtonClicked(String button) {
                 if (button.equals("createFlight")){
-                    kontroler.addFlightToDB(adminPanel.getNewFlightSpecs());
-                    System.out.println("Flight added to db!");
+                    buttonInspector = new ButtonInspector("createFlight");
+                    buttonInspector.pressedButton(adminPanel.getNewFlightSpecs());
                     adminPanel.resetCreateFlightPanel();
+                    JOptionPane.showMessageDialog(null, "Novi let uspješno dodan!", "Uspješno dodavanje", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });

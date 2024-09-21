@@ -6,6 +6,7 @@ import java.util.List;
 public abstract class PressedButtonAbsCLS {
 
     protected AddPlaneToDBStrategy addPlaneToDBStrategy;
+    protected AddFlightToDBStrategy addFlightToDBStrategy;
 
     protected PressedButtonStrategy pressedButtonStrategy;
 
