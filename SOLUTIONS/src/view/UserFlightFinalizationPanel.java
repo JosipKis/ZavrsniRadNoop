@@ -104,11 +104,6 @@ public class UserFlightFinalizationPanel extends JPanel implements ActionListene
     }
 
     @Override
-    public void removeObserver(ObservablePanel observer) {
-        observer.removeObserver(this);
-    }
-
-    @Override
     public void update(String text) {
         System.out.println("Notification successful");
         String[] data = auxCLS.getText().split(",");
