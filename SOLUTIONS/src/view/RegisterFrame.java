@@ -53,19 +53,24 @@ public class RegisterFrame extends JFrame {
             @Override
             public void registerButtonClicked(String btnClicked) {
                 List<String> data = new ArrayList<>();
-                if (Integer.parseInt(registerPanel.getAge()) > 17){
-                    data.add(registerPanel.getUsername());
-                    data.add(registerPanel.getPassword());
-                    data.add(String.valueOf(registerPanel.getAge()));
+                try {
+                    if (Integer.parseInt(registerPanel.getAge()) > 17){
+                        data.add(registerPanel.getUsername());
+                        data.add(registerPanel.getPassword());
+                        data.add(String.valueOf(registerPanel.getAge()));
 
-                    buttonInspector = new ButtonInspector(btnClicked);
-                    buttonInspector.pressedButton(data);
-                    setVisible(false);
-                    dispose();
-                    new LoginFrame();
-                }else {
-                    JOptionPane.showMessageDialog(null, "Korisnik mora imati 18+ godina!", "Dobna granica", JOptionPane.WARNING_MESSAGE);
+                        buttonInspector = new ButtonInspector(btnClicked);
+                        buttonInspector.pressedButton(data);
+                        setVisible(false);
+                        dispose();
+                        new LoginFrame();
+                    }else {
+                        JOptionPane.showMessageDialog(null, "Korisnik mora imati 18+ godina!", "Dobna granica", JOptionPane.WARNING_MESSAGE);
+                    }
+                }catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Sva polja moraju biti ispunjena!", "Prazna polja", JOptionPane.WARNING_MESSAGE);
                 }
+
             }
         });
     }
