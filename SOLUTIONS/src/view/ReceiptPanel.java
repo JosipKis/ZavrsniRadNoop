@@ -17,8 +17,6 @@ public class ReceiptPanel extends JPanel {
 
     private List<String> flightDetails;
 
-    private Kontroler kontroler;
-
     public ReceiptPanel(List<String> flightDetails){
         this.flightDetails = flightDetails;
         initComps();
@@ -26,7 +24,6 @@ public class ReceiptPanel extends JPanel {
     }
 
     private void initComps() {
-        kontroler = Kontroler.getInstance();
 
         plane = new JTextField(flightDetails.get(0));
         takeOffCity = new JTextField(flightDetails.get(1));

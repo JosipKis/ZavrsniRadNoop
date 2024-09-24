@@ -22,10 +22,14 @@ public class DocFilterAge extends DocumentFilter {
     }
 
     private boolean test(String text) {
+        if (text.isEmpty()) {
+            return true;
+        }
+
         try {
-            if (text.length() > 2){
+            if (text.length() > 2) {
                 return false;
-            }else {
+            } else {
                 Integer.parseInt(text);
                 return true;
             }
@@ -33,6 +37,7 @@ public class DocFilterAge extends DocumentFilter {
             return false;
         }
     }
+
 
     @Override
     public void replace(FilterBypass fb, int offset, int length, String text,
