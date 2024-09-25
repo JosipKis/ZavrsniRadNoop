@@ -32,6 +32,11 @@ public class Kontroler {
         classPrices = new ArrayList<>();
     }
 
+    /**
+     * Metoda koja povezuje korisnika da podatkovnu bazu
+     * Pokušava se uspostaviti konekcija sa bazom podataka s korisnickim imenom i lozinkom, a ako ne baci se iznimka
+     * @throws SQLException
+     */
     public void connectToDatabase() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -44,6 +49,11 @@ public class Kontroler {
         }
     }
 
+    /**
+     * Metoda koja prekida konekciju s bazom podataka
+     * Baca se iznimka ako se ne uspije prekinuti konekcija (ako nije povezano na bazu podataka)
+     * @throws SQLException
+     */
     public void dissconnect(){
         try {
             con.close();
@@ -52,6 +62,15 @@ public class Kontroler {
         }
     }
 
+    /**
+     * Metoda koja provjerava unesene podatke u bazi podataka.
+     * Ako korisnik postoji u bazi podataka, postavlja se trenutni korisnik na taj korisnik i nastavlja dalje u aplikaciju,
+     * ako ne baca inzimku
+     * @param username
+     * @param password
+     * @return
+     * @throws SQLException
+     */
     public boolean autehnticateLogin(String username, String password) throws SQLException {
         String SELECT_USER_QUERY = "SELECT * FROM User WHERE username = ? AND password = ?";
 

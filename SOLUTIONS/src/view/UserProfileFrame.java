@@ -19,6 +19,7 @@ public class UserProfileFrame extends JFrame implements ActionListener {
     private JMenu jMenu;
     private JMenuItem odjavaBtn;
     private JMenuItem kupovinaKarata;
+    private JMenuItem filterKarata;
     private JRadioButtonMenuItem lightThemeRB;
     private JRadioButtonMenuItem darkThemeRB;
     private ButtonGroup buttonGroup;
@@ -28,7 +29,7 @@ public class UserProfileFrame extends JFrame implements ActionListener {
     public UserProfileFrame() {
         super("Moj profil");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 400);
+        setSize(650, 450);
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -72,8 +73,13 @@ public class UserProfileFrame extends JFrame implements ActionListener {
         buttonGroup.add(darkThemeRB);
         Kontroler.determineUsersTheme(kontroler.getUsersTheme(Kontroler.getCurrentUserID()), lightThemeRB, darkThemeRB);
 
+        filterKarata = new JMenuItem("FILTRIRAJ PO DATUMU");
+        filterKarata.setActionCommand("filterKarata");
+        filterKarata.addActionListener(this);
+
         menuBar.add(jMenu);
         jMenu.add(kupovinaKarata);
+        jMenu.add(filterKarata);
         jMenu.addSeparator();
         jMenu.add(lightThemeRB);
         jMenu.add(darkThemeRB);
@@ -138,6 +144,12 @@ public class UserProfileFrame extends JFrame implements ActionListener {
                 revalidate();
                 repaint();
                 break;
+            case "filterKarata":
+                System.out.println("Filter po datumu");
+                System.out.println(userProfilePanel.getBeginDate());
+                System.out.println(userProfilePanel.getEndDate());
+                userProfilePanel.compareDates();
+
         }
     }
 }
