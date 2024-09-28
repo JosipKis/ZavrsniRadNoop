@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MrKisFlights:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MrKisFlights_jar</output-path>
+    <root id="archive" name="MrKisFlights.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="MrKisFlights" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/formdev/flatlaf/3.5.1/flatlaf-3.5.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
